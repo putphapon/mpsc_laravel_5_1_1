@@ -1,0 +1,181 @@
+@font-face {
+    font-family: 'Prompt';
+    src: url('../fonts/Prompt/Prompt-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Sarabun';
+    src: url('../fonts/Sarabun/Sarabun-Light.ttf') format('truetype');
+}
+
+:root {
+    --nav-background-color: rgba(155, 155, 155, 0.4);
+     --light: #f8f9fa;
+}
+
+body {
+    font-family: 'Sarabun', sans-serif; 
+    margin: 0;
+    padding: 0;   
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Prompt', sans-serif;
+}
+
+/* ** */
+section {
+    min-height: 100vh;
+}
+
+.headerTitle {
+    padding: 4ex 0 1ex 0;
+
+    font-size: 3rem;
+    text-transform: uppercase;
+}
+
+/* nav */
+nav {
+    max-height: 8ex;
+    margin-top: 4ex;
+    padding: 5ex 0 5ex 0;
+    background-color: var(--nav-background-color);
+}
+
+nav img {
+    width: 100px;
+    height: 100px;
+}
+
+
+@media screen and (max-width: 1200px) {
+    nav {
+        max-height: auto;
+        margin-top: 0;
+        padding: 0;
+        background-color: var(--nav-background-color);
+    }
+
+    nav img {
+        width: auto;
+        height: 40px;
+        position: relative;
+    }
+
+    nav i {
+        
+        position: relative;
+        color: white;
+        text-shadow: 0 0 5px black;
+      }
+
+      .dropdown-menu {
+        background-color: var(--nav-background-color);
+      }
+
+}
+
+
+nav a {
+    color: white;
+    text-shadow: 0 0 5px black;
+  }
+
+nav a:hover {
+    color: black;
+    text-shadow: 0 0 5px white;
+  }
+
+
+nav i:hover {
+    color: black;
+    text-shadow: 0 0 5px white;
+  }
+
+
+nav a.dropdown-item {
+    text-shadow: 0 0 2px black;
+}
+
+
+nav a.dropdown-item:hover {
+    text-shadow: 0 0 2px white;
+}
+
+/* title */
+.titleContainerCover {
+    position: relative;
+}
+
+
+/* section */
+section#manuscript,
+section#database,
+section#events {
+    background-image: url("../img/bg-manuscript.jpg");   
+    background-attachment: fixed;
+    background-size: 100hv;
+}
+
+.cardLink {
+    color: black;
+}
+
+a:hover.cardLink {
+    color: black;
+    text-decoration: none;
+}
+
+.card {
+    min-height: 200px;
+    border: 0;
+
+    -webkit-transition: box-shadow 0.2s;
+    transition: box-shadow 0.2s;
+}
+
+.card-img-top {
+    max-height: 100vh;
+}
+
+.cardShadow:hover {
+    box-shadow: 0 0 20px rgb(138, 138, 138);
+}
+
+
+/* titpitaka */
+section#titpitaka {
+    margin: 0;
+    padding: 0;
+}
+
+.sectionTipitaka {
+    margin: 0;
+    padding: 0;
+}
+
+.cardPosition {
+    width: 75%;
+}
+
+/* contact */
+#footer {
+    min-height: 20vh;
+
+    background-image: url('../img/footerpage.jpg');
+    background-size: 100% 100%;
+}
+
+
+/* footer */
+p.footer {
+    padding: 0;
+    margin: 0;
+}
+
