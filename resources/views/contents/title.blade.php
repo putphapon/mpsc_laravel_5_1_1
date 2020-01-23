@@ -17,11 +17,11 @@
           @foreach ($title as $item)
             @if( $loop->iteration == 1 )
               <div class="carousel-item active" data-interval="5000">
-                <img src="{{ asset('/storage/'.substr($item->title_image,7)) }}" class="min-vw-100 vh-100" alt="{{ $item->title_name }}">
+                <img src="{{ asset($item->title_image) }}" class="min-vw-100 vh-100" alt="{{ $item->title_name }}">
               </div>
             @else
               <div class="carousel-item" data-interval="5000">
-                <img src="{{ asset('/storage/'.substr($item->title_image,7)) }}" class="min-vw-100 vh-100" alt=" {{ $item->title_name }}">
+                <img src="{{ asset($item->title_image) }}" class="min-vw-100 vh-100" alt=" {{ $item->title_name }}">
               </div>
             @endif
           @endforeach

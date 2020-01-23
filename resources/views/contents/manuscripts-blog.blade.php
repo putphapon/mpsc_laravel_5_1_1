@@ -7,7 +7,7 @@
         </div>
 
         <div class="text-center">
-            <img src="{{ asset('/storage/'.substr($item->manuscripts_blog_image,7)) }}" class="rounded cardShadow w-100">
+            <img src="{{ asset($item->manuscripts_blog_image) }}" class="rounded cardShadow w-100">
         </div>
 
         <div class="row pt-4">

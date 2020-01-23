@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -49,6 +49,8 @@ class ManuscriptsBlog extends Controller
     public function show($id)
     {
         //
+        $manuscripts_blog = DB::table('mpsc_manuscripts_blogs')->where('id', $id)->get();
+        return view('home.manuscripts-blog', ['manuscripts_blog' => $manuscripts_blog]);
     }
 
     /**

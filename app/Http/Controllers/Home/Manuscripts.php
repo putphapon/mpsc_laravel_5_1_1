@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -16,7 +16,12 @@ class Manuscripts extends Controller
      */
     public function index()
     {
-        //
+        //select
+        $manuscripts_category = DB::table('mpsc_manuscripts_categories')->orderBy('created_at', 'desc')->get();
+        $manuscripts_blog = DB::table('mpsc_manuscripts_blogs')->orderBy('created_at', 'desc')->get();
+
+        return view('home.manuscripts', ['manuscripts_category' => $manuscripts_category,'manuscripts_blog' => $manuscripts_blog]);
+    
     }
 
     /**

@@ -12,14 +12,18 @@
         </div>
     </div>
     <br>
-
+    
     {{-- alert --}}
     @include('layouts.alert-admin')
+    
+    {{-- nav controller --}}
+    <div class="d-flex">
+        {{-- add --}}
+        <div class="p-2 flex-shrink-0">
+            {{-- button --}}
+            <button class="btn btn-primary" data-toggle="modal" data-target="#admin-database-form"><i class="fa fa-plus-square-o" aria-hidden="true"></i>  เพิ่ม</button>
 
-    {{-- form --}}
-    <div class="row">
-        <div class="col">
-            {{-- Modal Insert --}}
+            {{-- Modal --}}
             <div class="modal fade" id="admin-database-form" tabindex="-1" role="dialog" aria-labelledby="admin-database-form" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     {{-- form --}}
@@ -37,20 +41,20 @@
                                         {{-- POST --}}
                                         <input type="hidden" name="_method" value="POST">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
+                                        
                                         {{-- name --}}
                                         <div class="form-group">
                                             <label for="nameeDatabase">ชื่อฐานข้อมูล</label>
                                             <input type="text" name="nameDatabase" value="" class="form-control">
                                         </div>
-
+                                        
                                         {{-- link --}}
                                         <div class="form-group">
                                             <label for="linkDatabase">URL ฐานข้อมูล</label>
-                                            <input type="text" name="linkDatabase" value="" class="form-control">                                   
+                                            <input type="text" name="linkDatabase" value="" class="form-control">
                                             <small class="form-text text-muted">ใส่เครื่องหมาย # ถ้ายังไม่มีลิงก์</small>
                                         </div>
-
+                                        
                                         {{-- image --}}
                                         <div class="form-group">
                                             <label for="imageDatabase">รูปภาพโลโก้ ฐานข้อมูล</label>
@@ -68,18 +72,28 @@
                     </form>
                 </div>
             </div>
-            
-            {{-- button Insert --}}
-            <div class="row float-right mr-1">
-                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#admin-database-form"><i class="fa fa-plus-square-o" aria-hidden="true"></i>  เพิ่ม</button>
-            </div>
-            
+        </div>
+
+        {{-- search --}}
+        <div class="p-2 w-100">
+            <form action="{{ action('Admin\Database@search') }}" method="get">
+                <div class="input-group">
+                    {{-- input --}}
+                    <input type="text" name="search" value="" class="form-control">
+                    
+                    {{-- submit --}}
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit" value="Submit">ค้นหา</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
+
     <br>
     
     {{-- data --}}
-    <div class="row">    
+    <div class="row">
         <div class="col">
             <table class="table table-sm table-hover">
                 <thead class="bg-info text-light">
@@ -93,19 +107,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($database as $item) 
+                    <?php $i = 0;?>
+                    @foreach ($database as $item)
                     <tr>
                         {{-- No. --}}
-                        <th scope="row">{{ $loop->iteration }}</th>
+                        <th scope="row">{{ ++$i }}</th>
                         {{-- Name --}}
                         <td>{{ $item->database_name }}</td>
                         {{-- link --}}
                         <td>{{ $item->database_link }}</td>
                         {{-- image --}}
-                        <td>                        
-                            <img 
-                            {{-- cut sting '/public/' --}}
-                            src="{{ '' }}" 
+                        <td>
+                            <img
+                            src="{{ asset($item->database_image) }}"
                             alt="{{ $item->database_name }}"
                             class="rounded" style="height: 100px;">
                         </td>
@@ -116,7 +130,7 @@
                             <div class="modal fade" id="admin-database-form-edit-{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="admin-database-form-edit" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     {{-- form --}}
-                                    <form class="edit_form" action="{{ action('Admin/Database@update',$item->id) }}" method="post" enctype="multipart/form-data">
+                                    <form class="edit_form" action="{{ action('Admin\Database@update',$item->id) }}" method="post" enctype="multipart/form-data">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h4 class="modal-title" id="admin-database-form-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  แก้ไข ข้อมูล</h4>
@@ -147,10 +161,11 @@
 
                                                         {{-- image --}}
                                                         <div class="form-group">
-                                                            <label for="imageDatabase">รูปภาพโลโก้ ฐานข้อมูล :: {{ $item->database_image }}</label>
+                                                            <label for="imageDatabase">รูปภาพโลโก้ ฐานข้อมูล :: {{ substr($item->database_image,4) }}</label>
                                                             <input type="file" name="imageDatabase" value="" class="form-control-file">
-                                                            <img src="{{ '' }}" alt="{{ $item->database_name }}" class="p-2 rounded" style="height: 100px;">
-                                                        </div> 
+                                                            <img src="{{ asset($item->database_image) }}" alt="{{ $item->database_name }}" class="p-2 rounded" style="height: 100px;">
+                                                            
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -166,7 +181,7 @@
                         </td>
                         {{-- Delete --}}
                         <td>
-                            <form class="delete_form" action="{{ action('Admin/Database@destroy',$item->id) }}" method="post">
+                            <form class="delete_form" action="{{ action('Admin\Database@destroy',$item->id) }}" method="post">
                                 {{-- DELETE --}}
                                 <input type="hidden" name="_method" value="DELETE">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">

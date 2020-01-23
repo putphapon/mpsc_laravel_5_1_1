@@ -19,19 +19,19 @@
     <ul class="nav nav-tabs" id="tabHead" role="tablist">
         {{-- tab-1 --}}
         <li class="nav-item">
-            <a class="nav-link active" id="tab-1-tab" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">บทความ</a>
+            <a class="nav-link {{ $true ? 'active' : '' }}" id="tab-1-tab" data-toggle="tab" href="#tab-1" role="tab"  aria-controls="nav-1" aria-selected="{{ $true ? 'ture' : 'false' }}">บทความ</a>
         </li>
 
         {{-- tab-2 --}}
         <li class="nav-item">
-            <a class="nav-link" id="tab-2-tab" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">หมวด</a>
-        </li>        
+            <a class="nav-link {{ !$true ? 'active' : '' }}" id="tab-2-tab" data-toggle="tab" href="#tab-2" role="tab" aria-controls="nav-2" aria-selected="{{ !$true ? 'ture' : 'false' }}">หมวด</a>
+        </li>
     </ul>
     {{-- ------------------------------------------------------------------ --}}
     {{-- tabs tabsBody --}}
     <div class="tab-content" id="tabBody">
         {{-- tab-1 --}}
-        <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="tab-1-tab">
+        <div class="tab-pane fade {{ $true ? 'show active' : '' }}" id="tab-1" role="tabpanel" aria-labelledby="tab-1-tab">
             <div class="container">
                 {{-- title --}}
                 <br>
@@ -41,15 +41,22 @@
                     </div>
                 </div>
                
-                {{-- form --}}
-                <div class="row">
-                    <div class="col">
-                        {{-- Modal Insert --}}
+                {{-- nav controller --}}
+                <div class="d-flex">
+                    {{-- add --}}
+                    <div class="p-2 flex-shrink-0">
+                        {{-- button --}}
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#admin-manuscripts-blog-form"><i class="fa fa-plus-square-o" aria-hidden="true"></i>  เพิ่ม</button>
+                        {{-- Modal --}}
                         <div class="modal fade" id="admin-manuscripts-blog-form" tabindex="-1" role="dialog" aria-labelledby="admin-manuscripts-blog-form" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 {{-- form --}}
-                                <form action="{{ action('AdminManuscriptsBlog@store') }}" method="post" enctype="multipart/form-data">
-                                    @csrf @method('POST')
+                                <form action="{{ action('Admin\ManuscriptsBlog@store') }}" method="post" enctype="multipart/form-data">
+                                   
+                                    {{-- POST --}}
+                                    <input type="hidden" name="_method" value="POST">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h4 class="modal-title" id="admin-manuscripts-blog-form"><i class="fa fa-plus-square-o" aria-hidden="true"></i>  เพิ่มข้อมูล<h4>
@@ -84,8 +91,8 @@
                                                         <label for="idManuscriptsCategory">หมวด</label>
                                                         <select class="custom-select" name="idManuscriptsCategory">
                                                                 <option value="" selected>กรุณาเลือก</option>
-                                                            @foreach ($dataManuscriptsCategory as $subitem)
-                                                                <option value="{{$subitem['id']}}">{{ $subitem['manuscripts_category_name'] }}</option>
+                                                            @foreach ($manuscripts_category as $subitem)
+                                                                <option value="{{ $subitem->id }}">{{ $subitem->manuscripts_category_name }}</option>
                                                             @endforeach
                                                         </select>
                                                         <small class="form-text text-muted">ถ้าต้องการเพิ่มหมวด ให้ไปที่แทบ 'หมวด'</small>
@@ -101,7 +108,7 @@
                                                     {{-- link --}}
                                                     <div class="form-group">
                                                         <label for="linkManuscriptsBlog">ลิงก์ดาวน์โหลดไฟล์</label>
-                                                        <input type="text" name="linkManuscriptsBlog" value="" class="form-control">                                    
+                                                        <input type="text" name="linkManuscriptsBlog" value="" class="form-control">
                                                         <small class="form-text text-muted">ลิงก์แชร์ไฟล์ จาก Google Drive (*อย่าลืมเปิดแชร์ไฟล์ก่อนนำมากรอกลงฟอร์ม)</small>
                                                         <small class="form-text text-muted">ใส่เครื่องหมาย # ถ้ายังไม่มีลิงก์</small>
                                                     </div>
@@ -117,18 +124,35 @@
                                 </form>
                             </div>
                         </div>
-                        
-                        {{-- button Insert --}}
-                        <div class="row float-right mr-1">
-                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#admin-manuscripts-blog-form"><i class="fa fa-plus-square-o" aria-hidden="true"></i>  เพิ่ม</button>
-                        </div>
-                        
+                    </div>
+
+                    {{-- search --}}
+                    <div class="p-2 w-100">
+                        <form action="{{ action('Admin\ManuscriptsBlog@search') }}" method="get">
+                            <div class="input-group">
+                                {{-- input --}}
+                                <input type="text" name="search" value="" class="form-control">
+                                
+                                {{-- catagory --}}
+                                <select class="custom-select" name="idManuscriptsCategory">
+                                        <option value="" selected>กรุณาเลือก</option>
+                                    @foreach ($manuscripts_category as $subitem)
+                                        <option value="{{ $subitem->id }}">{{ $subitem->manuscripts_category_name }}</option>
+                                    @endforeach
+                                </select>
+                                
+                                {{-- submit --}}
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="submit" value="Submit">ค้นหา</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <br>
                 
                 {{-- data --}}
-                <div class="row">    
+                <div class="row">
                     <div class="col">
                         <table class="table table-sm table-hover">
                             <thead class="bg-info text-light">
@@ -145,37 +169,37 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($dataManuscriptsBlog as $item) 
+                                <?php $i = 0;?>
+                                @foreach ($manuscripts_blog as $item) 
                                 <tr>
                                     {{-- No. --}}
-                                    <th scope="row">{{ $loop->iteration }}</th>
+                                    <th scope="row">{{ ++$i }}</th>
                                     {{-- Name --}}
-                                    <td>{{ $item['manuscripts_blog_name'] }}</td>
+                                    <td>{{ $item->manuscripts_blog_name }}</td>
                                     {{-- detail --}}
-                                    <td>{{ $item['manuscripts_blog_detail'] }}</td>
+                                    <td>{{ $item->manuscripts_blog_detail }}</td>
                                     {{-- Image --}}
-                                    <td>                        
-                                        <img 
-                                        {{-- cut sting '/public/' --}}
-                                        src="{{ asset('/storage/'.substr($item['manuscripts_blog_image'],6)) }}" 
-                                        alt="{{ $item['manuscripts_blog_name'] }}"
+                                    <td>
+                                        <img
+                                        src="{{ asset($item->manuscripts_blog_image) }}" 
+                                        alt="{{ $item->manuscripts_blog_name }}"
                                         class="rounded" style="height: 100px;">
                                     </td>
                                     
                                     {{-- Category --}}
-                                    @foreach ($dataManuscriptsCategory as $subitem) 
-                                        @if ($subitem['id'] == $item['manuscripts_category_id'])
-                                            <td>{{ $subitem['manuscripts_category_name'] }}</td>
+                                    @foreach ($manuscripts_category as $subitem) 
+                                        @if ($subitem->id == $item->manuscripts_category_id)
+                                            <td>{{ $subitem->manuscripts_category_name }}</td>
                                         @endif
                                     @endforeach
 
                                     {{-- Tag --}}
-                                    <td>{{ $item['manuscripts_blog_tag'] }}</td>
+                                    <td>{{ $item->manuscripts_blog_tag }}</td>
 
                                     {{-- Link --}}
                                     <td>
-                                        @if($item['manuscripts_blog_link'] != "#")
-                                            <a href="{{$item['manuscripts_blog_link']}}" target="blank"><span class="badge badge-pill badge-success"><i class="fa fa-check p-1" aria-hidden="true"></i></a></span>
+                                        @if($item->manuscripts_blog_link != "#")
+                                            <a href="{{$item->manuscripts_blog_link}}" target="blank"><span class="badge badge-pill badge-success"><i class="fa fa-check p-1" aria-hidden="true"></i></a></span>
                                         @else
                                             <span class="badge badge-pill badge-danger"><i class="fa fa-close p-1" aria-hidden="true"></i></span>
                                         @endif
@@ -183,13 +207,12 @@
 
                                     {{-- Edit --}}
                                     <td>
-                                    <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#admin-manuscripts-blog-form-edit-{{$item['id']}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  แก้ไข</button>
+                                    <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#admin-manuscripts-blog-form-edit-{{$item->id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  แก้ไข</button>
                                         {{-- Modal Edit --}}
-                                        <div class="modal fade" id="admin-manuscripts-blog-form-edit-{{$item['id']}}" tabindex="-1" role="dialog" aria-labelledby="admin-manuscripts-blog-form-edit" aria-hidden="true">
+                                        <div class="modal fade" id="admin-manuscripts-blog-form-edit-{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="admin-manuscripts-blog-form-edit" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 {{-- form --}}
-                                                <form class="edit_form" action="{{ action('AdminManuscriptsBlog@update',$item['id']) }}" method="post" enctype="multipart/form-data">
-                                                    @csrf @method('PUT')
+                                                <form class="edit_form" action="{{ action('Admin\ManuscriptsBlog@update',$item->id) }}" method="post" enctype="multipart/form-data">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h4 class="modal-title" id="admin-manuscripts-blog-form-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  แก้ไข ข้อมูล</h4>
@@ -201,23 +224,27 @@
                                                         <div class="modal-body">
                                                             <div class="row">
                                                                 <div class="col">
+                                                                    {{-- PUT --}}
+                                                                    <input type="hidden" name="_method" value="PUT">
+                                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
                                                                     {{-- name --}}
                                                                     <div class="form-group">
                                                                         <label for="nameManuscriptsBlog">ชื่อบทความ</label>
-                                                                        <input type="text" name="nameManuscriptsBlog" value="{{ $item['manuscripts_blog_name'] }}" class="form-control">
+                                                                        <input type="text" name="nameManuscriptsBlog" value="{{ $item->manuscripts_blog_name }}" class="form-control">
                                                                     </div>
             
                                                                     {{-- detail --}}
                                                                     <div class="form-group">
                                                                         <label for="detailManuscriptsBlog">คำเกริ่น</label>
-                                                                        <textarea name="detailManuscriptsBlog" value="" class="form-control" row="5">{{ $item['manuscripts_blog_detail'] }}</textarea>
+                                                                        <textarea name="detailManuscriptsBlog" value="" class="form-control" row="5">{{ $item->manuscripts_blog_detail }}</textarea>
                                                                     </div>
 
                                                                     {{-- image --}}
                                                                     <div class="form-group">
-                                                                        <label for="imageManuscriptsBlog">รูปภาพบทความ :: {{ substr($item['manuscripts_blog_image'],11) }}</label>
+                                                                        <label for="imageManuscriptsBlog">รูปภาพบทความ :: {{ substr($item->manuscripts_blog_image,4) }}</label>
                                                                         <input type="file" name="imageManuscriptsBlog" value="" class="form-control-file">
-                                                                        <img src="{{ asset('/storage/'.substr($item['manuscripts_blog_image'],6)) }}" alt="{{ $item['manuscripts_blog_name'] }}" class="p-2 rounded" style="height: 100px;">
+                                                                        <img src="{{ asset($item->manuscripts_blog_image) }}" alt="{{ $item->manuscripts_blog_name }}" class="p-2 rounded" style="height: 100px;">
                                                                     </div> 
                                                                     
                                                                     {{-- category --}}
@@ -225,11 +252,11 @@
                                                                         <label for="idManuscriptsCategory">หมวด</label>
                                                                         <select class="custom-select" name="idManuscriptsCategory">
                                                                             <option selected>เลือกหมวด</option>
-                                                                            @foreach ($dataManuscriptsCategory as $subitem)
-                                                                                @if ($subitem['id'] == $item['manuscripts_category_id'])
-                                                                                    <option value="{{ $subitem['id'] }}" selected>{{ $subitem['manuscripts_category_name'] }}</option>
+                                                                            @foreach ($manuscripts_category as $subitem)
+                                                                                @if ($subitem->id == $item->manuscripts_category_id)
+                                                                                    <option value="{{ $subitem->id }}" selected>{{ $subitem->manuscripts_category_name }}</option>
                                                                                 @else
-                                                                                    <option value="{{ $subitem['id'] }}">{{ $subitem['manuscripts_category_name'] }}</option>
+                                                                                    <option value="{{ $subitem->id }}">{{ $subitem->manuscripts_category_name }}</option>
                                                                                 @endif
                                                                             @endforeach
                                                                         </select>
@@ -239,14 +266,14 @@
                                                                     {{-- tag --}}
                                                                     <div class="form-group">
                                                                         <label for="tagManuscriptsBlog">แท๊ก</label>
-                                                                        <input type="text" name="tagManuscriptsBlog" value="{{ $item['manuscripts_blog_tag']  }}" class="form-control">
+                                                                        <input type="text" name="tagManuscriptsBlog" value="{{ $item->manuscripts_blog_tag  }}" class="form-control">
                                                                         <small class="form-text text-muted">ใส่เครื่องหมาย # ถ้ายังไม่มีลิงก์</small>  
                                                                     </div>
 
                                                                     {{-- link --}}
                                                                     <div class="form-group">
                                                                         <label for="linkManuscriptsBlog">ลิงก์ดาวน์โหลดไฟล์</label>
-                                                                        <input type="text" name="linkManuscriptsBlog" value="{{ $item['manuscripts_blog_link'] }}" class="form-control">
+                                                                        <input type="text" name="linkManuscriptsBlog" value="{{ $item->manuscripts_blog_link }}" class="form-control">
                                                                         <small class="form-text text-muted">ลิงก์แชร์ไฟล์ จาก Google Drive (*อย่าลืมเปิดแชร์ไฟล์ก่อนนำมากรอกลงฟอร์ม)</small>
                                                                         <small class="form-text text-muted">ใส่เครื่องหมาย # ถ้ายังไม่มีลิงก์</small>
                                                                     </div>
@@ -266,8 +293,11 @@
                                     </td>
                                     {{-- Delete --}}
                                     <td>
-                                        <form class="delete_form" action="{{ action('AdminManuscriptsBlog@destroy',$item['id']) }}" method="post">
-                                            @csrf @method('DELETE')
+                                        <form class="delete_form" action="{{ action('Admin\ManuscriptsBlog@destroy',$item->id) }}" method="post">
+                                            {{-- DELETE --}}
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
                                             <button class="btn btn-danger btn-sm" type="submit" value="Submit"><i class="fa fa-trash-o" aria-hidden="true"></i>  ลบ</button>
                                         </form>
                                     </td>
@@ -300,7 +330,7 @@
         </div>
 
         {{-- tab-2 --}}
-        <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2-tab">
+        <div class="tab-pane fade {{ !$true ? 'show active' : '' }}" id="tab-2" role="tabpanel" aria-labelledby="tab-2-tab">
             <div class="container">
                 {{-- title --}}
                 <br>
@@ -310,15 +340,18 @@
                     </div>
                 </div>
             
-                {{-- form --}}
-                <div class="row">
-                    <div class="col">
-                        {{-- Modal Insert --}}
+                {{-- nav controller --}}
+                <div class="d-flex">
+                    {{-- add --}}
+                    <div class="p-2 flex-shrink-0">
+                        {{-- button --}}
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#admin-manuscripts-category-form"><i class="fa fa-plus-square-o" aria-hidden="true"></i>  เพิ่ม</button>
+                        {{-- Modal --}}
                         <div class="modal fade" id="admin-manuscripts-category-form" tabindex="-1" role="dialog" aria-labelledby="admin-manuscripts-category-form" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 {{-- form --}}
-                                <form action="{{ action('AdminManuscriptsCategory@store') }}" method="post" enctype="multipart/form-data">
-                                    @csrf @method('POST')   
+                                <form action="{{ action('Admin\ManuscriptsCategory@store') }}" method="post" enctype="multipart/form-data">
+                                    
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h4 class="modal-title" id="admin-manuscripts-category-form"><i class="fa fa-plus-square-o" aria-hidden="true"></i>  เพิ่มข้อมูล<h4>
@@ -329,6 +362,11 @@
                                         <div class="modal-body">
                                             <div class="row">
                                                 <div class="col">
+                                                                
+                                                    {{-- POST --}}
+                                                    <input type="hidden" name="_method" value="POST">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
                                                     {{-- name --}}
                                                     <div class="form-group">
                                                         <label for="nameManuscriptsCategory">ชื่อหมวด</label>
@@ -358,18 +396,27 @@
                                 </form>
                             </div>
                         </div>
-                        
-                        {{-- button Insert --}}
-                        <div class="row float-right mr-1">
-                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#admin-manuscripts-category-form"><i class="fa fa-plus-square-o" aria-hidden="true"></i>  เพิ่ม</button>
-                        </div>
-                        
+                    </div>
+
+                    {{-- search --}}
+                    <div class="p-2 w-100">
+                        <form action="{{ action('Admin\ManuscriptsCategory@search') }}" method="get">
+                            <div class="input-group">
+                                {{-- input --}}
+                                <input type="text" name="search" value="" class="form-control">
+                                
+                                {{-- submit --}}
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="submit" value="Submit">ค้นหา</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <br>
                 
                 {{-- data --}}
-                <div class="row">    
+                <div class="row">
                     <div class="col">
                         <table class="table table-sm table-hover">
                             <thead class="bg-info text-light">
@@ -383,31 +430,30 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($dataManuscriptsCategory as $item) 
+                                <?php $i = 0;?>
+                                @foreach ($manuscripts_category as $item) 
                                 <tr>
                                     {{-- No. --}}
-                                    <th scope="row">{{ $loop->iteration }}</th>
+                                    <th scope="row">{{ ++$i }}</th>
                                     {{-- Name --}}
-                                    <td>{{ $item['manuscripts_category_name'] }}</td>
+                                    <td>{{ $item->manuscripts_category_name }}</td>
                                     {{-- detail --}}
-                                    <td>{{ $item['manuscripts_category_detail'] }}</td>
+                                    <td>{{ $item->manuscripts_category_detail }}</td>
                                     {{-- Image --}}
-                                    <td>                        
-                                        <img 
-                                        {{-- cut sting '/public/' --}}
-                                        src="{{ asset('/storage/'.substr($item['manuscripts_category_image'],6)) }}" 
-                                        alt="{{ $item['manuscripts_category_name'] }}"
+                                    <td>
+                                        <img
+                                        src="{{ asset($item->manuscripts_category_image) }}" 
+                                        alt="{{ $item->manuscripts_category_name }}"
                                         class="rounded" style="height: 100px;">
                                     </td>
                                     {{-- Edit --}}
                                     <td>
-                                        <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#admin-manuscripts-category-form-edit-{{$item['id']}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  แก้ไข</button>
+                                        <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#admin-manuscripts-category-form-edit-{{$item->id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  แก้ไข</button>
                                         {{-- Modal Edit --}}
-                                        <div class="modal fade" id="admin-manuscripts-category-form-edit-{{$item['id']}}" tabindex="-1" role="dialog" aria-labelledby="admin-manuscripts-category-form-edit" aria-hidden="true">
+                                        <div class="modal fade" id="admin-manuscripts-category-form-edit-{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="admin-manuscripts-category-form-edit" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 {{-- form --}}
-                                                <form class="edit_form" action="{{ action('AdminManuscriptsCategory@update',$item['id']) }}" method="post" enctype="multipart/form-data">
-                                                    @csrf @method('PUT')
+                                                <form class="edit_form" action="{{ action('Admin\ManuscriptsCategory@update',$item->id) }}" method="post" enctype="multipart/form-data">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h4 class="modal-title" id="admin-manuscripts-category-form-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  แก้ไข ข้อมูล</h4>
@@ -418,24 +464,28 @@
                                                         <div class="modal-body">
                                                             <div class="row">
                                                                 <div class="col">
+                                                                    {{-- PUT --}}
+                                                                    <input type="hidden" name="_method" value="PUT">
+                                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            
                                                                     {{-- name --}}
                                                                     <div class="form-group">
                                                                         <label for="nameManuscriptsCategory">ชื่อหมวด</label>
-                                                                        <input type="text" name="nameManuscriptsCategory" value="{{ $item['manuscripts_category_name'] }}" class="form-control">
+                                                                        <input type="text" name="nameManuscriptsCategory" value="{{ $item->manuscripts_category_name }}" class="form-control">
                                                                     </div>
                                                                     
                                                                     {{-- detail --}}
                                                                     <div class="form-group">
                                                                         <label for="detailManuscriptsCategory">คำเกริ่น</label>
-                                                                        <textarea name="detailManuscriptsCategory" value="" class="form-control" row="5">{{ $item['manuscripts_category_detail'] }}</textarea>
+                                                                        <textarea name="detailManuscriptsCategory" value="" class="form-control" row="5">{{ $item->manuscripts_category_detail }}</textarea>
                                                                     </div>
                                                                     
                                                                     {{-- image --}}
                                                                     <div class="form-group">
-                                                                        <label for="imageManuscriptsCategory">รูปภาพหมวด :: {{ substr($item['manuscripts_category_image'],11) }}</label>
+                                                                        <label for="imageManuscriptsCategory">รูปภาพหมวด :: {{ substr($item->manuscripts_category_image,4) }}</label>
                                                                         <input type="file" name="imageManuscriptsCategory" value="" class="form-control-file">
-                                                                        <img src="{{ asset('/storage/'.substr($item['manuscripts_category_image'],6)) }}" alt="{{ $item['manuscripts_category_name'] }}" class="p-2 rounded" style="height: 100px;">
-                                                                    </div>                                                                    
+                                                                        <img src="{{ asset($item->manuscripts_category_image) }}" alt="{{ $item->manuscripts_category_name }}" class="p-2 rounded" style="height: 100px;">
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -451,8 +501,11 @@
                                     </td>
                                     {{-- Delete --}}
                                     <td>
-                                        <form class="delete_form" action="{{ action('AdminManuscriptsCategory@destroy',$item['id']) }}" method="post">
-                                            @csrf @method('DELETE')
+                                        <form class="delete_form" action="{{ action('Admin\ManuscriptsCategory@destroy',$item->id) }}" method="post">
+                                            {{-- DELETE --}}
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
                                             <button class="btn btn-danger btn-sm" type="submit" value="Submit"><i class="fa fa-trash-o" aria-hidden="true"></i>  ลบ</button>
                                             </form>
                                         </td>

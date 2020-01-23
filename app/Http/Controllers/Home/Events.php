@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -16,7 +16,10 @@ class Events extends Controller
      */
     public function index()
     {
-        //
+        //select
+        $events = DB::table('mpsc_events')->orderBy('created_at', 'desc')->get();
+
+        return view('home.events', ['events' => $events]);
     }
 
     /**

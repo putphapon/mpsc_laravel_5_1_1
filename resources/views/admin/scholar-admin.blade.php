@@ -15,23 +15,23 @@
     {{-- alert --}}
     @include('layouts.alert-admin')
 
-    {{-- tabs tabHead --}}    
+    {{-- tabs tabHead --}}
     <ul class="nav nav-tabs" id="tabHead" role="tablist">
         {{-- tab-1 --}}
         <li class="nav-item">
-            <a class="nav-link active" id="tab-1-tab" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">บทความ</a>
+            <a class="nav-link {{ $true ? 'active' : '' }}" id="tab-1-tab" data-toggle="tab" href="#tab-1" role="tab" aria-controls="nav-1" aria-selected="{{ $true ? 'ture' : 'false' }}">บทความ</a>
         </li>
 
         {{-- tab-2 --}}
         <li class="nav-item">
-            <a class="nav-link" id="tab-2-tab" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">หมวด</a>
+            <a class="nav-link {{ !$true ? 'active' : '' }}" id="tab-2-tab" data-toggle="tab" href="#tab-2" role="tab" aria-controls="nav-1" aria-selected="{{ !$true ? 'ture' : 'false' }}">หมวด</a>
         </li>        
     </ul>
     {{-- ------------------------------------------------------------------ --}}
     {{-- tabs tabsBody --}}
     <div class="tab-content" id="tabBody">
         {{-- tab-1 --}}
-        <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="tab-1-tab">
+        <div class="tab-pane fade {{ $true ? 'active show' : '' }}" id="tab-1" role="tabpanel" aria-labelledby="tab-1-tab">
             <div class="container">
                 {{-- title --}}
                 <br>
@@ -42,14 +42,16 @@
                 </div>
                
                 {{-- form --}}
-                <div class="row">
-                    <div class="col">
-                        {{-- Modal Insert --}}
+                <div class="d-flex">
+                    {{-- add --}}
+                    <div class="p-2 flex-shrink-0">
+                        {{-- button --}}
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#admin-scholar-blog-form"><i class="fa fa-plus-square-o" aria-hidden="true"></i>  เพิ่ม</button>
+                        {{-- Modal --}}
                         <div class="modal fade" id="admin-scholar-blog-form" tabindex="-1" role="dialog" aria-labelledby="admin-scholar-blog-form" aria-hidden="true">
                             <div class="modal-dialog" role="document">
-                                {{-- form --}}
-                                <form action="{{ action('AdminScholarBlog@store') }}" method="post" enctype="multipart/form-data">
-                                    @csrf @method('POST')
+                            {{-- form --}}
+                                <form action="{{ action('Admin\ScholarBlog@store') }}" method="post" enctype="multipart/form-data">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h4 class="modal-title" id="admin-scholar-blog-form"><i class="fa fa-plus-square-o" aria-hidden="true"></i>  เพิ่มข้อมูล<h4>
@@ -61,6 +63,11 @@
                                         <div class="modal-body">
                                             <div class="row">
                                                 <div class="col">
+                                                    
+                                                    {{-- POST --}}
+                                                    <input type="hidden" name="_method" value="POST">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
                                                     {{-- name --}}
                                                     <div class="form-group">
                                                         <label for="nameScholarBlog">ชื่อบทความ</label>
@@ -78,8 +85,8 @@
                                                         <label for="idScholarCategory">หมวด</label>
                                                         <select class="custom-select" name="idScholarCategory">
                                                                 <option value="" selected>กรุณาเลือก</option>
-                                                            @foreach ($dataScholarCategory as $subitem)
-                                                                <option value="{{$subitem['id']}}">{{ $subitem['scholar_category_name'] }}</option>
+                                                            @foreach ($scholar_category as $subitem)
+                                                                <option value="{{$subitem->id}}">{{ $subitem->scholar_category_name }}</option>
                                                             @endforeach
                                                         </select>
                                                         <small class="form-text text-muted">ถ้าต้องการเพิ่มหมวด ให้ไปที่แทบ 'หมวด'</small>
@@ -88,7 +95,7 @@
                                                     {{-- link --}}
                                                     <div class="form-group">
                                                         <label for="linkScholarBlog">ลิงก์ดาวน์โหลดไฟล์</label>
-                                                        <input type="text" name="linkScholarBlog" value="" class="form-control">                                    
+                                                        <input type="text" name="linkScholarBlog" value="" class="form-control">
                                                         <small class="form-text text-muted">ใส่เครื่องหมาย # ถ้ายังไม่มีลิงก์</small>
                                                     </div>
                                                 </div>
@@ -103,18 +110,34 @@
                                 </form>
                             </div>
                         </div>
-                        
-                        {{-- button Insert --}}
-                        <div class="row float-right mr-1">
-                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#admin-scholar-blog-form"><i class="fa fa-plus-square-o" aria-hidden="true"></i>  เพิ่ม</button>
-                        </div>
-                        
+                    </div>
+                    {{-- search --}}
+                    <div class="p-2 w-100">
+                        <form action="{{ action('Admin\ScholarBlog@search') }}" method="get">
+                            <div class="input-group">
+                                {{-- input --}}
+                                <input type="text" name="search" value="" class="form-control">
+                                
+                                {{-- catagory --}}
+                                <select class="custom-select" name="idScholarCategory">
+                                        <option value="" selected>กรุณาเลือก</option>
+                                    @foreach ($scholar_category as $subitem)
+                                        <option value="{{ $subitem->id }}">{{ $subitem->scholar_category_name }}</option>
+                                    @endforeach
+                                </select>
+                                
+                                {{-- submit --}}
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="submit" value="Submit">ค้นหา</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <br>
                 
                 {{-- data --}}
-                <div class="row">    
+                <div class="row">
                     <div class="col">
                         <table class="table table-sm table-hover">
                             <thead class="bg-info text-light">
@@ -129,26 +152,27 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($dataScholarBlog as $item) 
+                                <?php $i = 0;?>
+                                @foreach ($scholar_blog as $item)
                                 <tr>
                                     {{-- No. --}}
-                                    <th scope="row">{{ $loop->iteration }}</th>
+                                    <th scope="row">{{ ++$i }}</th>
                                     {{-- Name --}}
-                                    <td>{{ $item['scholar_blog_name'] }}</td>
+                                    <td>{{ $item->scholar_blog_name }}</td>
                                     {{-- Author --}}
-                                    <td>{{ $item['scholar_blog_author'] }}</td>
+                                    <td>{{ $item->scholar_blog_author }}</td>
 
                                     {{-- Category --}}
-                                    @foreach ($dataScholarCategory as $subitem) 
-                                        @if ($subitem['id'] == $item['scholar_category_id'])
-                                            <td>{{ $subitem['scholar_category_name'] }}</td>
+                                    @foreach ($scholar_category as $subitem) 
+                                        @if ($subitem->id == $item->scholar_category_id)
+                                            <td>{{ $subitem->scholar_category_name }}</td>
                                         @endif
                                     @endforeach
 
                                     {{-- Link --}}
                                     <td>
-                                        @if($item['scholar_blog_link'] != "#")
-                                            <a href="{{$item['scholar_blog_link']}}" target="blank"><span class="badge badge-pill badge-success"><i class="fa fa-check p-1" aria-hidden="true"></i></a></span>
+                                        @if($item->scholar_blog_link != "#")
+                                            <a href="{{$item->scholar_blog_link}}" target="blank"><span class="badge badge-pill badge-success"><i class="fa fa-check p-1" aria-hidden="true"></i></a></span>
                                         @else
                                             <span class="badge badge-pill badge-danger"><i class="fa fa-close p-1" aria-hidden="true"></i></span>
                                         @endif
@@ -156,13 +180,12 @@
 
                                     {{-- Edit --}}
                                     <td>
-                                       <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#admin-scholar-blog-form-edit-{{$item['id']}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  แก้ไข</button>
+                                       <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#admin-scholar-blog-form-edit-{{$item->id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  แก้ไข</button>
                                         {{-- Modal Edit --}}
-                                        <div class="modal fade" id="admin-scholar-blog-form-edit-{{$item['id']}}" tabindex="-1" role="dialog" aria-labelledby="admin-scholar-blog-form-edit" aria-hidden="true">
+                                        <div class="modal fade" id="admin-scholar-blog-form-edit-{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="admin-scholar-blog-form-edit" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 {{-- form --}}
-                                                <form class="edit_form" action="{{ action('AdminScholarBlog@update',$item['id']) }}" method="post" enctype="multipart/form-data">
-                                                    @csrf @method('PUT')
+                                                <form class="edit_form" action="{{ action('Admin\ScholarBlog@update',$item->id) }}" method="post" enctype="multipart/form-data">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h4 class="modal-title" id="admin-scholar-blog-form-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  แก้ไข ข้อมูล</h4>
@@ -174,16 +197,20 @@
                                                     <div class="modal-body">
                                                         <div class="row">
                                                             <div class="col">
+                                                                {{-- PUT --}}
+                                                                <input type="hidden" name="_method" value="PUT">
+                                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
                                                                 {{-- name --}}
                                                                 <div class="form-group">
                                                                     <label for="nameScholarBlog">ชื่อบทความ</label>
-                                                                    <input type="text" name="nameScholarBlog" value="{{ $item['scholar_blog_name'] }}" class="form-control">
+                                                                    <input type="text" name="nameScholarBlog" value="{{ $item->scholar_blog_name }}" class="form-control">
                                                                 </div>
                                                                 
                                                                 {{-- author --}}
                                                                 <div class="form-group">
                                                                     <label for="authorScholarBlog">ผู้แต่ง</label>
-                                                                    <input type="text" name="authorScholarBlog" value="{{ $item['scholar_blog_author'] }}" class="form-control">
+                                                                    <input type="text" name="authorScholarBlog" value="{{ $item->scholar_blog_author }}" class="form-control">
                                                                 </div>
                                                                     
                                                                 {{-- category --}}
@@ -191,11 +218,11 @@
                                                                     <label for="idScholarCategory">หมวด</label>
                                                                     <select class="custom-select" name="idScholarCategory">
                                                                         <option selected>เลือกหมวด</option>
-                                                                        @foreach ($dataScholarCategory as $subitem)
-                                                                            @if ($subitem['id'] == $item['scholar_category_id'])
-                                                                                <option value="{{ $subitem['id'] }}" selected>{{ $subitem['scholar_category_name'] }}</option>
+                                                                        @foreach ($scholar_category as $subitem)
+                                                                            @if ($subitem->id == $item->scholar_category_id)
+                                                                                <option value="{{ $subitem->id }}" selected>{{ $subitem->scholar_category_name }}</option>
                                                                             @else
-                                                                                <option value="{{ $subitem['id'] }}">{{ $subitem['scholar_category_name'] }}</option>
+                                                                                <option value="{{ $subitem->id }}">{{ $subitem->scholar_category_name }}</option>
                                                                             @endif
                                                                         @endforeach
                                                                     </select>
@@ -205,7 +232,7 @@
                                                                 {{-- link --}}
                                                                 <div class="form-group">
                                                                     <label for="linkScholarBlog">ลิงก์ดาวน์โหลดไฟล์</label>
-                                                                    <input type="text" name="linkScholarBlog" value="{{ $item['scholar_blog_link'] }}" class="form-control">
+                                                                    <input type="text" name="linkScholarBlog" value="{{ $item->scholar_blog_link }}" class="form-control">
                                                                     <small class="form-text text-muted">ลิงก์แชร์ไฟล์ จาก Google Drive (*อย่าลืมเปิดแชร์ไฟล์ก่อนนำมากรอกลงฟอร์ม)</small>
                                                                 </div>
                                                             </div>
@@ -222,8 +249,11 @@
                                     </td>
                                     {{-- Delete --}}
                                     <td>
-                                        <form class="delete_form" action="{{ action('AdminScholarBlog@destroy',$item['id']) }}" method="post">
-                                            @csrf @method('DELETE')
+                                        <form class="delete_form" action="{{ action('Admin\ScholarBlog@destroy',$item->id) }}" method="post">
+                                            {{-- DELETE --}}
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
                                             <button class="btn btn-danger btn-sm" type="submit" value="Submit"><i class="fa fa-trash-o" aria-hidden="true"></i>  ลบ</button>
                                         </form>
                                     </td>
@@ -256,7 +286,7 @@
         </div>
 
         {{-- tab-2 --}}
-        <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2-tab">
+        <div class="tab-pane fade {{ !$true ? 'active show' : '' }}" id="tab-2" role="tabpanel" aria-labelledby="tab-2-tab">
             <div class="container">
                 {{-- title --}}
                 <br>
@@ -267,14 +297,16 @@
                 </div>
             
                 {{-- form --}}
-                <div class="row">
-                    <div class="col">
+                <div class="d-flex">
+                    {{-- add --}}
+                    <div class="p-2 flex-shrink-0">
+                        {{-- button Insert --}}
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#admin-scholar-category-form"><i class="fa fa-plus-square-o" aria-hidden="true"></i>  เพิ่ม</button>
                         {{-- Modal Insert --}}
                         <div class="modal fade" id="admin-scholar-category-form" tabindex="-1" role="dialog" aria-labelledby="admin-scholar-category-form" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 {{-- form --}}
-                                <form action="{{ action('AdminScholarCategory@store') }}" method="post" enctype="multipart/form-data">
-                                    @csrf @method('POST')
+                                <form action="{{ action('Admin\ScholarCategory@store') }}" method="post" enctype="multipart/form-data">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h4 class="modal-title" id="admin-scholar-category-form"><i class="fa fa-plus-square-o" aria-hidden="true"></i>  เพิ่มข้อมูล<h4>
@@ -285,6 +317,10 @@
                                         <div class="modal-body">
                                             <div class="row">
                                                 <div class="col">
+                                                    {{-- POST --}}
+                                                    <input type="hidden" name="_method" value="POST">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
                                                     {{-- name --}}
                                                     <div class="form-group">
                                                         <label for="nameScholarCategory">ชื่อหมวด</label>
@@ -302,12 +338,21 @@
                                 </form>
                             </div>
                         </div>
-                        
-                        {{-- button Insert --}}
-                        <div class="row float-right mr-1">
-                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#admin-scholar-category-form"><i class="fa fa-plus-square-o" aria-hidden="true"></i>  เพิ่ม</button>
-                        </div>
-                        
+                    </div>
+
+                    {{-- search --}}
+                    <div class="p-2 w-100">
+                        <form action="{{ action('Admin\ScholarCategory@search') }}" method="get">
+                            <div class="input-group">
+                                {{-- input --}}
+                                <input type="text" name="search" value="" class="form-control">
+
+                                {{-- submit --}}
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="submit" value="Submit">ค้นหา</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <br>
@@ -325,21 +370,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($dataScholarCategory as $item) 
+                                <?php $i = 0;?>
+                                @foreach ($scholar_category as $item) 
                                 <tr>
                                     {{-- No. --}}
-                                    <th scope="row">{{ $loop->iteration }}</th>
+                                    <th scope="row">{{ ++$i }}</th>
                                     {{-- Name --}}
-                                    <td>{{ $item['scholar_category_name'] }}</td>
+                                    <td>{{ $item->scholar_category_name }}</td>
                                     {{-- Edit --}}
                                     <td>
-                                        <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#admin-scholar-category-form-edit-{{$item['id']}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  แก้ไข</button>
+                                        <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#admin-scholar-category-form-edit-{{$item->id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  แก้ไข</button>
                                         {{-- Modal Edit --}}
-                                        <div class="modal fade" id="admin-scholar-category-form-edit-{{$item['id']}}" tabindex="-1" role="dialog" aria-labelledby="admin-scholar-category-form-edit" aria-hidden="true">
+                                        <div class="modal fade" id="admin-scholar-category-form-edit-{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="admin-scholar-category-form-edit" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 {{-- form --}}
-                                                <form class="edit_form" action="{{ action('AdminScholarCategory@update',$item['id']) }}" method="post" enctype="multipart/form-data">
-                                                    @csrf @method('PUT')
+                                                <form class="edit_form" action="{{ action('Admin\ScholarCategory@update',$item->id) }}" method="post" enctype="multipart/form-data">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h4 class="modal-title" id="admin-scholar-category-form-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  แก้ไข ข้อมูล</h4>
@@ -350,10 +395,14 @@
                                                         <div class="modal-body">
                                                             <div class="row">
                                                                 <div class="col">
+                                                                    {{-- PUT --}}
+                                                                    <input type="hidden" name="_method" value="PUT">
+                                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                                    
                                                                     {{-- name --}}
                                                                     <div class="form-group">
                                                                         <label for="nameScholarCategory">ชื่อหมวด</label>
-                                                                        <input type="text" name="nameScholarCategory" value="{{ $item['scholar_category_name'] }}" class="form-control">
+                                                                        <input type="text" name="nameScholarCategory" value="{{ $item->scholar_category_name }}" class="form-control">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -370,8 +419,11 @@
                                     </td>
                                     {{-- Delete --}}
                                     <td>
-                                        <form class="delete_form" action="{{ action('AdminScholarCategory@destroy',$item['id']) }}" method="post">
-                                            @csrf @method('DELETE')
+                                        <form class="delete_form" action="{{ action('Admin\ScholarCategory@destroy',$item->id) }}" method="post">
+                                            {{-- DELETE --}}
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
                                             <button class="btn btn-danger btn-sm" type="submit" value="Submit"><i class="fa fa-trash-o" aria-hidden="true"></i>  ลบ</button>
                                             </form>
                                         </td>

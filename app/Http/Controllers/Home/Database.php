@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
-use App\MpscDatabase;
-
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -18,9 +17,9 @@ class Database extends Controller
     public function index()
     {
         //select
-        $database = MpscDatabase::all()->sortByDesc('updated_at');
+        $database = DB::table('mpsc_databases')->orderBy('created_at', 'desc')->get();
 
-        return view('index.database', ['database' => $database]);
+        return view('home.database', ['database' => $database]);
     }
 
     /**

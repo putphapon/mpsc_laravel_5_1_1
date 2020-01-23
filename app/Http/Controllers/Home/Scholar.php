@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -16,7 +16,11 @@ class Scholar extends Controller
      */
     public function index()
     {
-        //
+        //select
+        $scholar_category = DB::table('mpsc_scholar_categories')->orderBy('created_at', 'desc')->get();
+        $scholar_blog = DB::table('mpsc_scholar_blogs')->orderBy('created_at', 'desc')->get();
+
+        return view('home.scholar', ['scholar_category' => $scholar_category,'scholar_blog' => $scholar_blog]);
     }
 
     /**

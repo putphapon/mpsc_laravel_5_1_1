@@ -17,6 +17,7 @@ class Contact extends Controller
     public function index()
     {
         //
+        return view('home.contact');
     }
 
     /**

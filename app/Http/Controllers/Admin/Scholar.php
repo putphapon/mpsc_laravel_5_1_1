@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class Scholar extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +18,17 @@ class Scholar extends Controller
      */
     public function index()
     {
-        //
+        //select
+        $true = 'true';
+        $scholar_category = DB::table('mpsc_scholar_categories')->orderBy('created_at', 'desc')->get();
+        $scholar_blog = DB::table('mpsc_scholar_blogs')->orderBy('created_at', 'desc')->get();
+
+
+        return view('admin.scholar-admin', [
+            'scholar_category' => $scholar_category,
+            'scholar_blog' => $scholar_blog,
+            'true' => $true
+        ]);
     }
 
     /**

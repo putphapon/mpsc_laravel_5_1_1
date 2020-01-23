@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use App\MpscDatabase;
- 
+
+use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\MpscDatabase;
+use Illuminate\Support\Facades\DB;
 
 class Database extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +20,7 @@ class Database extends Controller
     public function index()
     {
         //select
-        $database = MpscDatabase::all()->get();
+        $database = MpscDatabase::all();
 
         return view('admin.database-admin', ['database' => $database]);
     }
@@ -31,6 +33,14 @@ class Database extends Controller
     public function create()
     {
         //
+    }
+
+    public function search(Request $request = null)
+    {
+        $search = $request->search;
+        $database = DB::table('mpsc_databases')->where('database_name','like','%'.$search.'%')->get();
+    
+        return view('admin.database-admin', ['database' => $database]);
     }
 
     /**
@@ -50,22 +60,27 @@ class Database extends Controller
             ]
         );
 
-        //insert
+        //create
         $database = new MpscDatabase;
         $database->database_name = $request->nameDatabase;
         $database->database_link = $request->linkDatabase;
-        // $database->database_image = $request->file('imageDatabase');
         
-
+        //upload file
         if($request->hasFile('imageDatabase')){
-            $image_filename = $request->file('imageDatabase')->getClientOriginalName();
-            $image_name = random_bytes(10).$image_filename;
+            //define Name file
+            $image_name = date('Ymd-His-').$request->file('imageDatabase')->getClientOriginalName();
 
-            $destination = base_path()."/public/image/";
+            //define Storage file
+            $public_path = 'img/';
+            $destination = base_path()."/public/".$public_path;
 
+            //save file
             $request->file('imageDatabase')->move($destination,$image_name);
-            $database->database_image = $image_name;
+            
+            //add name to database field
+            $database->database_image = $public_path.$image_name;
         }
+        
         //save
         $database->save();
 
@@ -112,24 +127,36 @@ class Database extends Controller
         );
 
         //search form id
-        $data = MpscDatabase::find($id);
+        $database = MpscDatabase::find($id);
 
-        $data->database_name = $request->nameDatabase;
-        $data->database_link = $request->linkDatabase;
+        //defind
+        $database->database_name = $request->nameDatabase;
+        $database->database_link = $request->linkDatabase;
 
-        //check image is null?
-        if($request->imageDatabase != null) {
+        //uploal file
+        if($request->hasFile('imageDatabase')){
             //delete file
-            Storage::delete($data['image_image']);
+            $destination = base_path()."/public/";
+            unlink($destination.$database->database_image);
 
-            //add file
-            $data->database_image = $request->file('imageDatabase')->store('public/img');
+            //define Name file
+            $image_name = date('Ymd-His-').$request->file('imageDatabase')->getClientOriginalName();
+
+            //define Storage file
+            $public_path = 'img/';
+            $destination = base_path()."/public/".$public_path;
+
+            //save file
+            $request->file('imageDatabase')->move($destination,$image_name);
+            
+            //add name to database field
+            $database->database_image = $public_path.$image_name;
         }
 
         //save
-        $data->save();
+        $database->save();
 
-        return  redirect()->route('database.index')->with('success','แก้ไขข้อมูลเรียบร้อย');
+        return  redirect()->action('Admin\Database@index')->with('success','แก้ไขข้อมูลเรียบร้อย');
     }
 
     /**
@@ -140,6 +167,16 @@ class Database extends Controller
      */
     public function destroy($id)
     {
-        //
+        //search from id
+        $database = MpscDatabase::find($id);
+
+        //delete file
+        $destination = base_path()."/public/";
+        unlink($destination.$database->database_image);
+
+        //delete
+        $database->delete();
+
+        return  redirect()->action('Admin\Database@index')->with('success','แก้ไขข้อมูลเรียบร้อย');
     }
 }

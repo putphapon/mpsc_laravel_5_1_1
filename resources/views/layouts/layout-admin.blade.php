@@ -24,7 +24,7 @@
 <body>
 
 {{-- nav --}}
-@include('admin.nav-admin')
+@include('layouts.nav-admin')
 <br>
 
 @yield('content')

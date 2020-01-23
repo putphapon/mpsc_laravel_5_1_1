@@ -11,73 +11,83 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+//Home
+Route::resource('/', 'Home\Title');
+
+//About
+Route::resource('/home/about', 'Home\About');
+Route::resource('/home/objective', 'Home\AboutObjective');
+Route::resource('/home/board', 'Home\AboutBoard');
+
+//Database
+Route::resource('/home/database', 'Home\Database');
+
+//Scholar
+Route::resource('/home/scholar', 'Home\Scholar');
+
+//Manuscripts
+Route::resource('/home/manuscripts', 'Home\Manuscripts');
+Route::resource('/home/manuscriptscategory', 'Home\ManuscriptsCategory');
+Route::resource('/home/manuscriptsblog', 'Home\ManuscriptsBlog');
+
+//VDO
+Route::resource('/home/vdo', 'Home\Vdo');
+
+//Events
+Route::resource('/home/events', 'Home\Events');
+
+//Shop
+Route::resource('/home/shops', 'Home\Shops');
+
+//Contact
+Route::resource('/home/contact', 'Home\Contact');
 
 
-// //Home
-// Route::resource('/', 'Home\Title');
 
-// //About
-// Route::resource('/about', 'Home\About');
-// Route::resource('/objective', 'Home\AboutObjective');
-// Route::resource('/board', 'Home\AboutBoard');
+//Admin
+//title
+Route::resource('/admin/title', 'Admin\Title');
+Route::get('/admin/title','Admin\Title@search');
 
-// //Database
-Route::resource('/database', 'Home\Database');
+//about
+Route::resource('/admin/about', 'Admin\About');
 
-// //Scholar
-// Route::resource('/scholar', 'Home\Scholar');
-
-// //Manuscripts
-// Route::resource('/manuscripts', 'Home\Manuscripts');
-// Route::resource('/manuscriptscategory', 'Home\ManuscriptsCategory');
-// Route::resource('/manuscriptsblog', 'Home\ManuscriptsBlog');
-
-// //VDO
-// Route::resource('/vdo', 'Home\Vdo');
-
-// //Events
-// Route::resource('/events', 'Home\Events');
-
-// //Shop
-// Route::resource('/shops', 'Home\Shops');
-
-// //Contact
-// Route::resource('/contact', 'Home\Contact');
-
-
-
-// //Admin
-// //title
-// Route::resource('/admin/title', 'Admin\Title');
-
-// //about
-// Route::resource('/admin/about', 'Admin\About');
-
-// //Database
+//Database
 Route::resource('/admin/database', 'Admin\Database');
+Route::get('/admin/database','Admin\Database@search');
 
-// //Scholar
-// Route::resource('/admin/scholar', 'Admin\Scholar');
-// Route::resource('/admin/scholarcategory', 'Admin\ScholarCategory');
-// Route::resource('/admin/scholarblog', 'Admin\ScholarBlog');
+//Scholar
+Route::resource('/admin/scholar', 'Admin\Scholar');
+Route::resource('/admin/scholarcategory', 'Admin\ScholarCategory');
+Route::get('/admin/scholarcategory','Admin\ScholarCategory@search');
 
-// //Manuscripts
-// Route::resource('/admin/manuscripts', 'Admin\Manuscripts');
-// Route::resource('/admin/manuscriptscategory', 'Admin\ManuscriptsCategory');
-// Route::resource('/admin/manuscriptsblog', 'Admin\ManuscriptsBlog');
+Route::resource('/admin/scholarblog', 'Admin\ScholarBlog');
+Route::get('/admin/scholarblog','Admin\ScholarBlog@search');
 
-// //VDO
-// Route::resource('/admin/vdo', 'Admin\VDO');
+//Manuscripts
+Route::resource('/admin/manuscripts', 'Admin\Manuscripts');
+Route::resource('/admin/manuscriptscategory', 'Admin\ManuscriptsCategory');
+Route::get('/admin/manuscriptscategory','Admin\ManuscriptsCategory@search');
 
-// //Events
-// Route::resource('/admin/events', 'Admin\Events');
+Route::resource('/admin/manuscriptsblog', 'Admin\ManuscriptsBlog');
+Route::get('/admin/manuscriptsblog','Admin\ManuscriptsBlog@search');
 
-// //Shop
-// Route::resource('/admin/shops', 'Admin\Shops');
+//VDO
+Route::resource('/admin/vdo', 'Admin\VDO');
+Route::get('/admin/vdo','Admin\VDO@search');
 
-// //Contact
-// Route::resource('/admin/contact', 'Admin\Contact');
+//Events
+Route::resource('/admin/events', 'Admin\Events');
+Route::get('/admin/events','Admin\Events@search');
+
+//Shop
+Route::resource('/admin/shops', 'Admin\Shops');
+Route::get('/admin/shops','Admin\Shops@search');
+
+//Contact
+Route::resource('/admin/contact', 'Admin\Contact');
 

@@ -16,15 +16,17 @@
     {{-- alert --}}
     @include('layouts.alert-admin')
 
-    {{-- form --}}
-    <div class="row">
-        <div class="col">
-            {{-- Modal Insert --}}
+    {{-- nav controller --}}
+    <div class="d-flex">
+        {{-- button add --}}
+        <div class="p-2 flex-shrink-0">
+            <button class="float-right mr-1 btn btn-primary" data-toggle="modal" data-target="#title-admin-form"><i class="fa fa-plus-square-o" aria-hidden="true">  </i>  เพิ่ม</button>
+
+            {{-- Modal add --}}
             <div class="modal fade" id="title-admin-form" tabindex="-1" role="dialog" aria-labelledby="title-admin-form" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     {{-- form --}}
-                    <form action="{{ action('AdminTitle@store') }}" method="post" enctype="multipart/form-data">
-                        @csrf @method('POST')
+                    <form action="{{ action('Admin\Title@store') }}" method="post" enctype="multipart/form-data">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h4 class="modal-title" id="title-admin-form"><i class="fa fa-plus-square-o" aria-hidden="true"></i>  เพิ่มข้อมูล</h4>
@@ -35,6 +37,10 @@
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col">
+                                        {{-- POST --}}
+                                        <input type="hidden" name="_method" value="POST">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
                                         {{--name --}}
                                         <div class="form-group">
                                             <label for="nameTitle">ชื่อภาพ</label>
@@ -50,6 +56,7 @@
                                 </div>
                             </div>
                             
+                            {{-- submit --}}
                             <div class="modal-footer">
                                 <button type="submit" value="Submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i>  บันทึก</button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-window-close-o" aria-hidden="true"></i>  ปิด</button>
@@ -58,17 +65,27 @@
                     </form>
                 </div>
             </div>
-            
-            {{-- button Insert --}}
-            <div class="row float-right mr-1">
-                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#title-admin-form"><i class="fa fa-plus-square-o" aria-hidden="true">  </i>  เพิ่ม</button>
-            </div>
+        </div>
+
+        {{-- search --}}
+        <div class="p-2 w-100">
+            <form action="{{ action('Admin\Title@search') }}" method="get">
+                <div class="input-group">
+                    {{-- input --}}
+                    <input type="text" name="search" value="" class="form-control">
+                    
+                    {{-- submit --}}
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit" value="Submit">ค้นหา</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
     <br>
     
     {{-- data --}}
-    <div class="row">    
+    <div class="row">
         <div class="col">
             <table class="table table-sm table-hover">
                 <thead class="bg-info text-light">
@@ -81,29 +98,28 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($data as $item) 
+                    <?php $i = 0;?>
+                    @foreach ($title as $item)
                     <tr>
                         {{-- No. --}}
-                        <th scope="row">{{ $loop->iteration }}</th>
+                        <th scope="row">{{ ++$i }}</th>
                         {{-- Name --}}
-                        <td>{{ $item['title_name'] }}</td>
+                        <td>{{ $item->title_name }}</td>
                         {{-- Image --}}
-                        <td>                        
-                            <img 
-                            {{-- cut sting '/public/' --}}
-                            src="{{ asset('/storage/'.substr($item['title_image'],6)) }}" 
-                            alt="{{ $item['title_name'] }}"
+                        <td>
+                            <img
+                            src="{{ asset($item->title_image) }}" 
+                            alt="{{ $item->title_name }}"
                             class="rounded" style="height: 100px;">
                         </td>
                         {{-- Edit --}}
                         <td>
-                        <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#title-admin-form-edit-{{$item['id']}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  แก้ไข</button>
+                        <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#title-admin-form-edit-{{$item->id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  แก้ไข</button>
                             {{-- Modal Edit --}}
-                            <div class="modal fade" id="title-admin-form-edit-{{$item['id']}}" tabindex="-1" role="dialog" aria-labelledby="title-admin-form-edit" aria-hidden="true">
+                            <div class="modal fade" id="title-admin-form-edit-{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="title-admin-form-edit" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     {{-- form --}}
-                                    <form class="edit_form" action="{{ action('AdminTitle@update',$item['id']) }}" method="post" enctype="multipart/form-data">
-                                        @csrf @method('PUT')
+                                    <form class="edit_form" action="{{ action('Admin\Title@update',$item->id) }}" method="post" enctype="multipart/form-data">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h4 class="modal-title" id="title-admin-form-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  แก้ไขข้อมูล</h4>
@@ -114,17 +130,21 @@
                                             <div class="modal-body">
                                                 <div class="row">
                                                     <div class="col">
+                                                        {{-- PUT --}}
+                                                        <input type="hidden" name="_method" value="PUT">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
                                                         {{--name --}}
                                                         <div class="form-group">
                                                             <label for="nameTitle">ชื่อภาพ</label>
-                                                            <input type="text" name="nameTitle" value="{{ $item['title_name'] }}" class="form-control">
+                                                            <input type="text" name="nameTitle" value="{{ $item->title_name }}" class="form-control">
                                                         </div>
                                                         
                                                         {{-- image --}}
                                                         <div class="form-group">
-                                                            <label for="imageTitle">รูปภาพ :: {{ substr($item['title_image'],11) }}</label>
+                                                            <label for="imageTitle">รูปภาพ :: {{ substr($item->title_image,4) }}</label>
                                                             <input type="file" name="imageTitle" value="" class="form-control-file">
-                                                            <img src="{{ asset('/storage/'.substr($item['title_image'],6)) }}" alt="{{ $item['title_name'] }}" class="rounded p-2 " style="height: 100px;">
+                                                            <img src="{{ asset($item->title_image) }}" alt="{{ $item->title_name }}" class="rounded p-2 " style="height: 100px;">
                                                         </div>
 
                                                     </div>
@@ -142,8 +162,11 @@
                         </td>
                         {{-- Delete --}}
                         <td>
-                            <form class="delete_form" action="{{ action('AdminTitle@destroy',$item['id']) }}" method="post">
-                                @csrf @method('DELETE')
+                            <form class="delete_form" action="{{ action('Admin\Title@destroy',$item->id) }}" method="post">
+                                {{-- DELETE --}}
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                
                                 <button class="btn btn-danger btn-sm" type="submit" value="Submit"><i class="fa fa-trash-o" aria-hidden="true"></i>  ลบ</button>
                                 </form>
                             </td>

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Home;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -49,6 +49,10 @@ class ManuscriptsCategory extends Controller
     public function show($id)
     {
         //
+        $manuscripts_category = DB::table('mpsc_manuscripts_categories')->where('id', $id)->get();
+        $manuscripts_blog = DB::table('mpsc_manuscripts_blogs')->orderBy('created_at', 'desc')->get();
+
+        return view('home.manuscripts-category', ['manuscripts_category' => $manuscripts_category,'manuscripts_blog' => $manuscripts_blog]);
     }
 
     /**

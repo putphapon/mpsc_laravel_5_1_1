@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -16,7 +16,9 @@ class Shops extends Controller
      */
     public function index()
     {
-        //
+        //select
+        $shops = DB::table('mpsc_shops')->orderBy('created_at', 'desc')->get();
+        return view('home.shops', ['shops' => $shops]);
     }
 
     /**

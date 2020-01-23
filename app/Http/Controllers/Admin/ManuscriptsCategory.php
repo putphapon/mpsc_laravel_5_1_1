@@ -6,9 +6,13 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use App\MpscManuscriptsCategory;
+use App\MpscManuscriptsBlog;
 
 class ManuscriptsCategory extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -17,6 +21,7 @@ class ManuscriptsCategory extends Controller
     public function index()
     {
         //
+        return route('manuscripts.index');
     }
 
     /**
@@ -29,6 +34,30 @@ class ManuscriptsCategory extends Controller
         //
     }
 
+    public function search(Request $request = null)
+    {
+        $search = $request->search;
+
+        if($search != null) {
+            $manuscripts_category = DB::table('mpsc_manuscripts_categories')
+                        ->where('manuscripts_category_name','like','%'.$search.'%')
+                        ->orderBy('updated_at', 'desc')
+                        ->get();
+        } else {
+            $manuscripts_category = DB::table('mpsc_manuscripts_categories')
+                        ->orderBy('updated_at', 'desc')
+                        ->get();
+        }
+        
+        $manuscripts_blog = MpscManuscriptsBlog::all();
+        $true = '';
+
+        return view('admin.manuscripts-admin', [
+            'manuscripts_blog' => $manuscripts_blog,
+            'manuscripts_category' => $manuscripts_category,
+             'true' => $true
+            ]);
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -37,7 +66,40 @@ class ManuscriptsCategory extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validate
+        $this->validate($request,
+            [
+                'nameManuscriptsCategory' => 'required',
+                'detailManuscriptsCategory' => 'required',
+                'imageManuscriptsCategory' => 'required'
+            ]
+        ); 
+
+        //create
+        $manuscripts_category = new MpscManuscriptsCategory;
+        $manuscripts_category->manuscripts_category_name = $request->nameManuscriptsCategory;
+        $manuscripts_category->manuscripts_category_detail = $request->detailManuscriptsCategory;
+        
+        //upload file
+        if($request->hasFile('imageManuscriptsCategory')){
+            //define Name file
+            $image_name = date('Ymd-His-').$request->file('imageManuscriptsCategory')->getClientOriginalName();
+
+            //define Storage file
+            $public_path = 'img/';
+            $destination = base_path()."/public/".$public_path;
+
+            //save file
+            $request->file('imageManuscriptsCategory')->move($destination,$image_name);
+            
+            //add name to database field
+            $manuscripts_category->manuscripts_category_image = $public_path.$image_name;
+        }
+
+        //save
+        $manuscripts_category->save();
+
+        return  redirect()->action('Admin\Manuscripts@index')->with('success','บันทึกข้อมูลเรียบร้อย');
     }
 
     /**
@@ -71,7 +133,46 @@ class ManuscriptsCategory extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //validate
+        $this->validate($request,
+            [
+                'nameManuscriptsCategory' => 'required',
+                'detailManuscriptsCategory' => 'required',
+                'imageManuscriptsCategory' => 'required'
+            ]
+        ); 
+
+        //search from id
+        $manuscripts_category = MpscManuscriptsCategory::if($id);
+
+        //define
+        $manuscripts_category->manuscripts_category_name = $request->nameManuscriptsCategory;
+        $manuscripts_category->manuscripts_category_detail = $request->detailManuscriptsCategory;
+        
+        //upload file
+        if($request->hasFile('imageManuscriptsCategory')){
+            //delete file
+            $destination = base_path()."/public/";
+            unlink($destination.$manuscripts_category->manuscripts_category_image);
+            
+            //define Name file
+            $image_name = date('Ymd-His-').$request->file('imageManuscriptsCategory')->getClientOriginalName();
+
+            //define Storage file
+            $public_path = 'img/';
+            $destination = base_path()."/public/".$public_path;
+
+            //save file
+            $request->file('imageManuscriptsCategory')->move($destination,$image_name);
+            
+            //add name to database field
+            $manuscripts_category->manuscripts_category_image = $public_path.$image_name;
+        }
+
+        //save
+        $manuscripts_category->save();
+
+        return  redirect()->action('Admin\Manuscripts@index')->with('success','บันทึกข้อมูลเรียบร้อย');
     }
 
     /**
@@ -82,6 +183,16 @@ class ManuscriptsCategory extends Controller
      */
     public function destroy($id)
     {
-        //
+        //search from id
+        $manuscripts_category = MpscManuscriptsCategory::if($id);
+        
+        //delete file
+        $destination = base_path()."/public/";
+        unlink($destination.$manuscripts_category->manuscripts_category_image);
+        
+        //delete
+        $manuscripts_category->delete();
+        
+        return  redirect()->action('Admin\Manuscripts@index')->with('success','บันทึกข้อมูลเรียบร้อย');
     }
 }

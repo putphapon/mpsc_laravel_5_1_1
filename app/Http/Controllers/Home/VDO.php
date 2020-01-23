@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -16,7 +16,9 @@ class VDO extends Controller
      */
     public function index()
     {
-        //
+        //select
+        $vdo = DB::table('mpsc_vdos')->orderBy('created_at', 'desc')->get();
+        return view('home.vdo', ['vdo' => $vdo]);
     }
 
     /**

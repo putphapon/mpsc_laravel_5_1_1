@@ -8,7 +8,7 @@
         <div class="d-flex justify-content-around mt-3 mb-3">
         @foreach ($shops as $item)
             <div class="card col-md-3 col-sm-12 cardShadow bg-white rounded">
-            <img src="{{ asset('/storage/'.substr($item->shops_image,7)) }}" class="img-thumbnail rounded" alt="{{ $item->shops_name }}">                    
+            <img src="{{ asset($item->shops_image) }}" class="img-thumbnail rounded" alt="{{ $item->shops_name }}">                    
 
                 <div class="card-body text-center">
                     <a href="{{ $item->shops_link }}" class="text-dark text-decoration-none" target="_blank">

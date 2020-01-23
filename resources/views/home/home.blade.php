@@ -21,16 +21,18 @@
   
           <!-- carousel-inner  -->
           <div class="carousel-inner col">
+            <?php $i = 1 ?>
             @foreach ($title as $item)
-              @if( $loop->iteration == 1 )
+              @if( $i == 1 )
                 <div class="carousel-item active" data-interval="5000">
-                  <img src="{{ asset('/storage/'.substr($item->title_image,7)) }}" class="min-vw-100 vh-100" alt="{{ $item->title_name }}">
+                  <img src="{{ asset($item->title_image) }}" class="min-vw-100 vh-100" alt="{{ $item->title_name }}">
                 </div>
               @else
                 <div class="carousel-item" data-interval="5000">
-                  <img src="{{ asset('/storage/'.substr($item->title_image,7)) }}" class="min-vw-100 vh-100" alt=" {{ $item->title_name }}">
+                  <img src="{{ asset($item->title_image) }}" class="min-vw-100 vh-100" alt=" {{ $item->title_name }}">
                 </div>
               @endif
+              <?php $i++ ?>
             @endforeach
           </div>
       </div>
@@ -56,8 +58,7 @@
             @foreach ($database as $item)  
                 <div class="col-md-4 text-center">
                     <a href="{{$item->database_link}}" class="">
-                        {{-- <i class="fa fa-database" style="font-size:10rem"></i> --}}
-                        <img src="{{ asset('/storage/'.substr($item->database_image,6)) }}" alt="{{ $item->database_name }}" class="rounded p-2 " style="height: 100px;">
+                        <img src="{{ asset($item->database_image) }}" alt="{{ $item->database_name }}" class="rounded p-2 " style="height: 100px;">
                         
                         <h6>{{$item->database_name}}</h6>
                     </a>
@@ -66,7 +67,7 @@
         </div>
 
         <div class="d-flex flex-row-reverse p-6">
-            <a href="{{ action('HomeDatabase@index')}}"><p class="badge badge-pill badge-light"> เพิ่มเติม... </p></a>
+            <a href="{{ action('Home\Database@index')}}"><p class="badge badge-pill badge-light"> เพิ่มเติม... </p></a>
         </div>
     </div>
 </section>
@@ -90,19 +91,19 @@
                     </div>
                     <div class="collapsed">
                         <div class="card-body">
-                            @php $i = 0;  @endphp
+                            <?php $i = 0;  ?>
                             @foreach ($scholar_blog as $subitem)
                                 @if (($subitem->scholar_category_id == $item->id) && ($i < 3))
                                     <a href="{{ $subitem->scholar_blog_link }}" target="blank" class="text-decoration-none">{{ $subitem->scholar_blog_name }}
                                         <footer class="blockquote-footer">{{ $subitem->scholar_blog_author }}</footer>
                                     </a>
                                     <br>
-                                    @php $i++;  @endphp
+                                    <?php $i++; ?>
                                 @endif
                             @endforeach
     
                             <div class="text-right">
-                                <a href="{{ action('HomeScholar@index')}}"><p class="badge badge-pill badge-light"> อ่านต่อ </p></a>
+                                <a href="{{ action('Home\Scholar@index')}}"><p class="badge badge-pill badge-light"> อ่านต่อ </p></a>
                             </div>
                         </div>
                     </div>
@@ -112,7 +113,7 @@
         </div>
 
         <div class="d-flex flex-row-reverse  p-6">
-            <a href="{{ action('HomeScholar@index')}}"><p class="badge badge-pill badge-light"> เพิ่มเติม... </p></a>
+            <a href="{{ action('Home\Scholar@index')}}"><p class="badge badge-pill badge-light"> เพิ่มเติม... </p></a>
         </div>
     </div>
 </section>
@@ -130,25 +131,25 @@
             @foreach ($manuscripts_category as $item)
                 <div class="col-md-4 col-sm-6 pb-5">
                     <div class="card cardShadow bg-transparent">
-                        <img src="{{ asset('/storage/'.substr($item->manuscripts_category_image,7)) }}" class="card-img-top" style="max-height: 250px;" alt=" ">
+                        <img src="{{ asset($item->manuscripts_category_image) }}" class="card-img-top" style="max-height: 250px;" alt=" ">
                         <div class="p-3">
                             <h5 class="card-title pt-3 text-center"><i class="fa fa-books"></i>{{$item->manuscripts_category_name}}</h5>
                             <p>{{$item->manuscripts_category_detail}}</p>
     
                             <!-- content -->
-                            @php $i = 0;  @endphp
+                            <?php $i = 0;  ?>
                                 @foreach ($manuscripts_blog as $subitem)
                                     @if (($subitem->manuscripts_category_id == $item->id) && ($i < 3))
-                                        <a href="/manuscriptsblog/{{$subitem->id}}" class="text-decoration-none text-muted">
+                                        <a href="/home/manuscriptsblog/{{$subitem->id}}" class="text-decoration-none text-muted">
                                             <p class="h6"><i class="fa fa-book-open"></i>   {{$subitem->manuscripts_blog_name}}</p>
                                         </a> 
-                                    @php $i++;  @endphp
+                                    <?php $i++; ?>
                                 @endif
                             @endforeach
                         </div>
     
                         <div class="text-right pr-3">
-                            <a href="/manuscriptscategory/{{$item->id}}"><p class="badge badge-pill badge-light"> อ่านต่อ </p></a>
+                            <a href="/home/manuscriptscategory/{{$item->id}}"><p class="badge badge-pill badge-light"> อ่านต่อ </p></a>
                         </div>
                     </div>
                 </div>
@@ -156,7 +157,7 @@
         </div>
 
         <div class="d-flex flex-row-reverse p-6">
-            <a href="{{ action('HomeManuscripts@index')}}"><p class="badge badge-pill badge-light"> เพิ่มเติม... </p></a>
+            <a href="{{ action('Home\Manuscripts@index')}}"><p class="badge badge-pill badge-light"> เพิ่มเติม... </p></a>
         </div>
     </div>
 </section>
@@ -170,7 +171,7 @@
     
         <!-- section content -->
         <div class="d-flex justify-content-around">
-            @php $i = 0;  @endphp
+            <?php $i = 0;  ?>
             @foreach ($vdo as $item)
                 @if ($i < 3)
                     <div class="col-md-4">
@@ -184,13 +185,13 @@
                             </div>
                         </div>
                     </div>
-                    @php $i++;  @endphp
+                    <?php $i++;  ?>
                 @endif
             @endforeach
         </div>
 
         <div class="d-flex flex-row-reverse p-6">
-            <a href="{{ action('HomeVdo@index')}}"><p class="badge badge-pill badge-light"> เพิ่มเติม... </p></a>
+            <a href="{{ action('Home\Vdo@index')}}"><p class="badge badge-pill badge-light"> เพิ่มเติม... </p></a>
         </div>
     </div>
 </section>
@@ -205,12 +206,12 @@
 
         <!-- section content -->
         <div class="row mt-3 mb-3">
-            @php $i = 0;  @endphp
+            <?php $i = 0;  ?>
             @foreach ($events as $item)
                 @if ($i < 3)
                     <div class="d-flex justify-content-around col-md-4 col-sm-12">
                         <div class="card cardShadow cardPosition mb-5 bg-white rounded">
-                            <img src="{{ asset('/storage/'.substr($item->events_image,7)) }}" class="card-img-top" alt=" ">
+                            <img src="{{ asset($item->events_image) }}" class="card-img-top" alt=" ">
                             <div class="card-body">
                                 <h5 class="card-title"> </h5>
                                     <p class="card-text text-muted">วันที่ {{ $item->events_date}}</p>
@@ -226,13 +227,13 @@
                             </div>
                         </div>
                     </div>
-                    @php $i++;  @endphp
+                    <?php $i++;  ?>
                 @endif
             @endforeach
         </div>
 
         <div class="d-flex flex-row-reverse p-6">
-            <a href="{{ action('HomeEvents@index')}}"><p class="badge badge-pill badge-light"> เพิ่มเติม... </p></a>
+            <a href="{{ action('Home\Events@index')}}"><p class="badge badge-pill badge-light"> เพิ่มเติม... </p></a>
         </div>
     </div>
 </section>
@@ -246,11 +247,11 @@
 
         <!-- section content -->
         <div class="d-flex justify-content-around mt-3 mb-3">
-            @php $i = 0;  @endphp
+            <?php $i = 0;  ?>
             @foreach ($shops as $item)
                 @if ($i < 3)
                     <div class="card col-md-3 col-sm-12 cardShadow bg-white rounded">
-                        <img src="{{ asset('/storage/'.substr($item->shops_image,7)) }}" class="img-thumbnail rounded" alt="{{ $item->shops_name }}">                    
+                        <img src="{{ asset($item->shops_image) }}" class="img-thumbnail rounded" alt="{{ $item->shops_name }}">                    
 
                         <div class="card-body text-center">
                             <a href="{{ $item->shops_link }}" class="text-dark text-decoration-none" target="_blank">
@@ -259,13 +260,13 @@
                             </a>
                         </div>
                     </div>
-                    @php $i++;  @endphp
+                    <?php $i++; ?>
                 @endif
             @endforeach
         </div>
 
         <div class="d-flex flex-row-reverse p-6">
-            <a href="{{ action('HomeShops@index')}}"><p class="badge badge-pill badge-light"> เพิ่มเติม... </p></a>
+            <a href="{{ action('Home\Shops@index')}}"><p class="badge badge-pill badge-light"> เพิ่มเติม... </p></a>
         </div>
     </div>
 </section>

@@ -23,11 +23,11 @@
 </head>
 <body>
 
-@include('contents.nav')
+@include('layouts.nav')
 
 @yield('content')
 
-@include('contents.footer')
+@include('layouts.footer')
 
 <!-- Google Analytic -->
 <script async src='https://www.googletagmanager.com/gtag/js?id=UA-145708508-1'>
