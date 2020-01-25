@@ -18,35 +18,30 @@
 <!-- icon -->
 <link rel="shortcut icon" href="/img/logo/logo-mpsc.png" type="image/x-icon">
 
-<title>Admin :: @yield('title-bar') | Manuscript Preservation and Study Center</title>
+<title>@yield('title-bar') | Manuscript Preservation and Study Center</title>
 
 </head>
 <body>
 
-{{-- nav --}}
-@include('layouts.nav-admin')
-<br>
 
 @yield('content')
-<br>
 
-<div class="fixed-bottom d-flex justify-content-between bg-secondary">
-    <p class="d-inline footer text-light p-1"><small>คุณเข้าระบบด้วย Email :: {{ Auth::user()->email }}</small></p>
-    
-    
-    <p class="d-inline footer text-light p-1"><small>@yield('title-bar') | Manuscript Preservation and Study Center</small>
-        <!-- Authentication Links -->
-        @if(Auth::check())
-            <a class="btn btn-outline-danger btn-sm" href="/auth/logout" role="button">ออกจากระบบ</a>
-        @endif
-    </p>
-</div>
+<!-- Google Analytic -->
+<script async src='https://www.googletagmanager.com/gtag/js?id=UA-145708508-1'>
+</script>
+
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-145708508-1');
+</script>
 
 <!-- JavaScript -->
 <script src="{{asset('/js/jquery.js')}}"></script>
 <script src="{{asset('/js/app.js')}}"></script>
 <script src="{{asset('/js/script.js')}}"></script>
-
 
 </body>
 </html>

@@ -12,6 +12,10 @@ use App\MpscManuscriptsBlog;
 
 class ManuscriptsBlog extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     
     /**
      * Display a listing of the resource.
@@ -165,7 +169,6 @@ class ManuscriptsBlog extends Controller
             [
                 'nameManuscriptsBlog' => 'required',
                 'detailManuscriptsBlog' => 'required',
-                'imageManuscriptsBlog' => 'required',
                 'idManuscriptsCategory' => 'required',
                 'tagManuscriptsBlog' => 'required',
                 'linkManuscriptsBlog' => 'required'

@@ -101,8 +101,9 @@
                                                     {{-- tag --}}
                                                     <div class="form-group">
                                                         <label for="tagManuscriptsBlog">แท๊ก</label>
-                                                        <input type="text" name="tagManuscriptsBlog" value="" class="form-control">
-                                                        <small class="form-text text-muted">ใส่เครื่องหมาย # ถ้ายังไม่มีลิงก์</small>  
+                                                        <textarea name="tagManuscriptsBlog" value="" class="form-control" row="5"></textarea>
+                                                        <small class="form-text text-muted">เว้นวรรคคำด้วยเครื่องหมาย , (ลูกน้ำ)</small>
+                                                        <small class="form-text text-muted">ใส่เครื่องหมาย # ถ้ายังไม่มีข้อมูล</small>
                                                     </div>
 
                                                     {{-- link --}}
@@ -266,8 +267,9 @@
                                                                     {{-- tag --}}
                                                                     <div class="form-group">
                                                                         <label for="tagManuscriptsBlog">แท๊ก</label>
-                                                                        <input type="text" name="tagManuscriptsBlog" value="{{ $item->manuscripts_blog_tag  }}" class="form-control">
-                                                                        <small class="form-text text-muted">ใส่เครื่องหมาย # ถ้ายังไม่มีลิงก์</small>  
+                                                                        <textarea name="tagManuscriptsBlog" value="" class="form-control" row="5">{{ $item->manuscripts_blog_tag }}</textarea>
+                                                                        <small class="form-text text-muted">เว้นวรรคคำด้วยเครื่องหมาย , (ลูกน้ำ)</small>
+                                                                        <small class="form-text text-muted">ใส่เครื่องหมาย # ถ้ายังไม่มีข้อมูล</small>
                                                                     </div>
 
                                                                     {{-- link --}}

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -12,6 +11,10 @@ use App\MpscManuscriptsBlog;
 
 class ManuscriptsCategory extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     
     /**
      * Display a listing of the resource.
@@ -110,7 +113,7 @@ class ManuscriptsCategory extends Controller
      */
     public function show($id)
     {
-        //
+        // 
     }
 
     /**
@@ -137,8 +140,7 @@ class ManuscriptsCategory extends Controller
         $this->validate($request,
             [
                 'nameManuscriptsCategory' => 'required',
-                'detailManuscriptsCategory' => 'required',
-                'imageManuscriptsCategory' => 'required'
+                'detailManuscriptsCategory' => 'required'
             ]
         ); 
 

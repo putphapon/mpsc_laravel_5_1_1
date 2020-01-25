@@ -45,11 +45,14 @@
 
 
     <!-- copyrigth -->
-    <div class="d-flex justify-content-center flex-column  pb-3">
+    <div class="d-flex justify-content-center flex-column pb-3">
         <p class="h6">
             <i class="fa fa-copyright"></i>
             {{ date("Y") }} - {{ date("Y")+1 }}  All Rights Reserved
         </p>
-        <a href="/admin" class="text-decoration-none"><small>เข้าสู่ระบบ</small></a>
+
+        <div>
+            <a href="/auth/login" class="btn btn-outline-dark btn-sm"  role="button">เข้าสู่ระบบ</a>
+        </div>
     </div>
 </section>

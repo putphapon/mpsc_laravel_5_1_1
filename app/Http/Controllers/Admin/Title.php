@@ -11,6 +11,10 @@ use App\MpscTitle;
 
 class Title extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -118,8 +122,7 @@ class Title extends Controller
         //validate
         $this->validate($request,
             [
-                'nameTitle' => 'required',
-                'imageTitle' => 'required'
+                'nameTitle' => 'required'
             ]
         );
 

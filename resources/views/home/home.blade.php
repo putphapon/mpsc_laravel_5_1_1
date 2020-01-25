@@ -39,7 +39,7 @@
     </div>
   </section>
   
-  <section class="d-flex justify-content-around align-items-center text-center">
+  <section class="d-flex justify-content-around align-items-center text-center  detailTitle">
     <div>
         <h1>กิจของเรา... ไม่ใช่เพื่อประโยชน์ของตนเอง<br>
           แต่เพื่อให้เป็นความดี...แก่ผู้ที่จะมาในภายหลัง</h1>
@@ -76,7 +76,7 @@
 <section id="scholar">
     <div class="container">
         <div class="row">
-            <h1 class="headerTitle">บทความวิชาการ/งานวิจัย</h1>
+            <h1 class="headerTitle ">บทความวิชาการ/งานวิจัย</h1>
         </div>
 
         <!--  scholar -->
@@ -122,10 +122,30 @@
 <section id="manuscript">
     <div class="container">
         <div class="row">
-            {{-- ธารความรู้ --}}
             <h1 class="headerTitle">ธารความรู้</h1>
         </div>
-    
+    <div class="row">
+        {{-- search --}}
+        <div class="pt-3 pb-3 w-100">
+            <form action="{{ action('Home\ManuscriptsBlogTag@store') }}" method="post">
+                <div class="input-group">
+
+                    {{-- POST --}}
+                    <input type="hidden" name="_method" value="POST">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                    {{-- input --}}
+                    <input type="text" name="search" value="" class="form-control" placeholder="ค้นหา">
+                    
+                    {{-- submit --}}
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit" value="Submit">ค้นหา</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
         <!-- section content -->
         <div class="row mt-3 mb-3">
             @foreach ($manuscripts_category as $item)
@@ -256,7 +276,7 @@
                         <div class="card-body text-center">
                             <a href="{{ $item->shops_link }}" class="text-dark text-decoration-none" target="_blank">
                                 <h5 class="card-titlept-3 pb-3">{{ $item->shops_name }}</h5>
-                                <i class="fa fa-book"> อ่าน</i>
+                                <i class="fa fa-book"></i> อ่าน
                             </a>
                         </div>
                     </div>

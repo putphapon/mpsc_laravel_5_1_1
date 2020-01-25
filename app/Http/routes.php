@@ -15,6 +15,16 @@
 //     return view('welcome');
 // });
 
+// Authentication routes...
+Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::get('auth/logout', 'Auth\AuthController@getLogout');
+
+// Registration routes...
+Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::post('auth/register', 'Auth\AuthController@postRegister');
+
+ 
 //Home
 Route::resource('/', 'Home\Title');
 
@@ -33,6 +43,8 @@ Route::resource('/home/scholar', 'Home\Scholar');
 Route::resource('/home/manuscripts', 'Home\Manuscripts');
 Route::resource('/home/manuscriptscategory', 'Home\ManuscriptsCategory');
 Route::resource('/home/manuscriptsblog', 'Home\ManuscriptsBlog');
+Route::resource('/home/manuscriptsblogtag','Home\ManuscriptsBlogTag');
+
 
 //VDO
 Route::resource('/home/vdo', 'Home\Vdo');
@@ -49,6 +61,9 @@ Route::resource('/home/contact', 'Home\Contact');
 
 
 //Admin
+Route::resource('/dashboard', 'Admin\Dashboard');
+Route::get('/home', 'Admin\Dashboard@index');
+
 //title
 Route::resource('/admin/title', 'Admin\Title');
 Route::get('/admin/title','Admin\Title@search');
@@ -75,6 +90,7 @@ Route::get('/admin/manuscriptscategory','Admin\ManuscriptsCategory@search');
 
 Route::resource('/admin/manuscriptsblog', 'Admin\ManuscriptsBlog');
 Route::get('/admin/manuscriptsblog','Admin\ManuscriptsBlog@search');
+
 
 //VDO
 Route::resource('/admin/vdo', 'Admin\VDO');

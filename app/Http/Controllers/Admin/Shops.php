@@ -11,6 +11,10 @@ use App\MpscShops;
 
 class Shops extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     
     /**
      * Display a listing of the resource.
@@ -121,7 +125,6 @@ class Shops extends Controller
         $this->validate($request,
             [
                 'nameShops' => 'required',
-                'imageShops' => 'required',
                 'linkShops' => 'required'
             ]
         );

@@ -13,7 +13,7 @@
                 <div class="card-body text-center">
                     <a href="{{ $item->shops_link }}" class="text-dark text-decoration-none" target="_blank">
                         <h5 class="card-titlept-3 pb-3">{{ $item->shops_name }}</h5>
-                        <i class="fa fa-book"> อ่าน</i>
+                        <i class="fa fa-book"></i> อ่าน
                     </a>
                 </div>
             </div>
