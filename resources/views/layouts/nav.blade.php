@@ -34,7 +34,6 @@
                 ค้นหา
             </button>
             <div class="dropdown-menu">
-                <script async src="https://cse.google.com/cse.js?cx=008341805127915127433:42dxa5yxayl"></script>
                 <div class="gcse-search"></div>
             </div>
         </div>

@@ -30,8 +30,10 @@
 @include('layouts.footer')
 
 <!-- Google Analytic -->
-<script async src='https://www.googletagmanager.com/gtag/js?id=UA-145708508-1'>
-</script>
+<script async src='https://www.googletagmanager.com/gtag/js?id=UA-145708508-1'></script>
+
+<!-- Google Search Custom -->
+<script async src="https://cse.google.com/cse.js?cx=008341805127915127433:42dxa5yxayl"></script>
 
 <script>
     window.dataLayer = window.dataLayer || [];
