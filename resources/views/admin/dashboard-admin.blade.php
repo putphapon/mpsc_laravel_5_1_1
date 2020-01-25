@@ -12,6 +12,8 @@
     </div>
     {{-- alert --}}
     @include('layouts.alert-admin')
+
+    <a href="/auth/register" class="btn btn-light btn-sm" role="button">ลงทะเบียน <small>สำหรับเจ้าหน้าที่</small></a>
     
 </div>
 @endsection
