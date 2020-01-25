@@ -12,7 +12,7 @@
                         <li><a class="text-decoration-none" href="{{ action('Home\Database@index') }}">ฐานข้อมูล</a></li>
                         <li><a class="text-decoration-none" href="{{ action('Home\Scholar@index') }}">บทความวิชาการ/งานวิจัย</a></li>
                         <li><a class="text-decoration-none" href="{{ action('Home\Manuscripts@index') }}">ธารความรู้</a></li>
-                        <li><a class="text-decoration-none" href="{{ action('Home\Vdo@index') }}">สื่อ VDO</a></li>
+                        <li><a class="text-decoration-none" href="{{ action('Home\VDO@index') }}">สื่อ VDO</a></li>
                         <li><a class="text-decoration-none" href="{{ action('Home\Events@index') }}">กิจกรรม</a></li>
                         <li><a class="text-decoration-none" href="{{ action('Home\Shops@index') }}">ร้านหนังสือ</a></li>
                         <li><a class="text-decoration-none" href="{{ action('Home\Contact@index') }}">ติดต่อเรา</a></li>

@@ -212,7 +212,7 @@
         </div>
 
         <div class="d-flex flex-row-reverse p-6">
-            <a href="{{ action('Home\Vdo@index')}}"><p class="badge badge-pill badge-light"> เพิ่มเติม... </p></a>
+            <a href="{{ action('Home\VDO@index')}}"><p class="badge badge-pill badge-light"> เพิ่มเติม... </p></a>
         </div>
     </div>
 </section>

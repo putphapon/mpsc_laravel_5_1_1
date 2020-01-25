@@ -23,7 +23,7 @@
             <li class="nav-item"><a class="nav-link" href="{{ action('Home\Database@index') }}">ฐานข้อมูล</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ action('Home\Scholar@index') }}">บทความวิชาการ/งานวิจัย</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ action('Home\Manuscripts@index') }}">ธารความรู้</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ action('Home\Vdo@index') }}">สื่อ VDO</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ action('Home\VDO@index') }}">สื่อ VDO</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ action('Home\Events@index') }}">กิจกรรม</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ action('Home\Shops@index') }}">ร้านหนังสือ</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ action('Home\Contact@index') }}">ติดต่อเรา</a></li>
