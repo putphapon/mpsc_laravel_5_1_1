@@ -124,27 +124,28 @@
         <div class="row">
             <h1 class="headerTitle">ธารความรู้</h1>
         </div>
-    <div class="row">
+
         {{-- search --}}
-        <div class="pt-3 pb-3 w-100">
-            <form action="{{ action('Home\ManuscriptsBlogTag@store') }}" method="post">
-                <div class="input-group">
+        <div class="row p-2">
+            <div class="pt-3 pb-3 w-100">
+                <form action="{{ action('Home\ManuscriptsBlogTag@store') }}" method="post">
+                    <div class="input-group">
 
-                    {{-- POST --}}
-                    <input type="hidden" name="_method" value="POST">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        {{-- POST --}}
+                        <input type="hidden" name="_method" value="POST">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-                    {{-- input --}}
-                    <input type="text" name="search" value="" class="form-control" placeholder="ค้นหา">
-                    
-                    {{-- submit --}}
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="submit" value="Submit">ค้นหา</button>
+                        {{-- input --}}
+                        <input type="text" name="search" value="" class="form-control" placeholder="ค้นหา">
+                        
+                        {{-- submit --}}
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit" value="Submit">ค้นหา</button>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
 
         <!-- section content -->
         <div class="row mt-3 mb-3">
