@@ -7,7 +7,7 @@
         <!--  scholar -->
         <div class="row">
             @foreach ($scholar_category as $item)
-            <div class="col">
+            <div class="col-md-6 col-sm-12 pb-2">
                 <div class="card">
                     <div class="card-header">
                         <h2 class="mb-0 text-decoration-none">
