@@ -267,11 +267,11 @@
         </div>
 
         <!-- section content -->
-        <div class="d-flex justify-content-around mt-3 mb-3">
-            <?php $i = 0;  ?>
-            @foreach ($shops as $item)
-                @if ($i < 3)
-                    <div class="card col-md-3 col-sm-12 cardShadow bg-white rounded">
+        <?php $i = 0;  ?>
+        @foreach ($shops as $item)
+            @if ($i < 3)
+                <div class="d-flex justify-content-around col-md-4 col-sm-12 mt-3 mb-3">
+                    <div class="card cardShadow  bg-white rounded">
                         <img src="{{ asset($item->shops_image) }}" class="img-thumbnail rounded" alt="{{ $item->shops_name }}">                    
 
                         <div class="card-body text-center">
@@ -281,10 +281,10 @@
                             </a>
                         </div>
                     </div>
-                    <?php $i++; ?>
-                @endif
-            @endforeach
-        </div>
+                </div>
+                <?php $i++; ?>
+            @endif
+        @endforeach
 
         <div class="d-flex flex-row-reverse p-6">
             <a href="{{ action('Home\Shops@index')}}"><p class="badge badge-pill badge-light"> เพิ่มเติม... </p></a>

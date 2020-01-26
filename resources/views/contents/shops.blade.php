@@ -5,8 +5,8 @@
         </div>
 
         <!-- section content -->
-        <div class="d-flex justify-content-around mt-3 mb-3">
         @foreach ($shops as $item)
+        <div class="d-flex justify-content-around mt-3 mb-3">
             <div class="card col-md-3 col-sm-12 cardShadow bg-white rounded">
             <img src="{{ asset($item->shops_image) }}" class="img-thumbnail rounded" alt="{{ $item->shops_name }}">                    
 
@@ -17,8 +17,8 @@
                     </a>
                 </div>
             </div>
-            @endforeach
         </div>
+        @endforeach
     </div>
 </section>
 

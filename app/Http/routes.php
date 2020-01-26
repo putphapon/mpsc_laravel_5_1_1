@@ -47,7 +47,7 @@ Route::resource('/home/manuscriptsblogtag','Home\ManuscriptsBlogTag');
 
 
 //VDO
-Route::resource('/home/vdo', 'Home\Vdo');
+Route::resource('/home/vdo', 'Home\VDO');
 
 //Events
 Route::resource('/home/events', 'Home\Events');
