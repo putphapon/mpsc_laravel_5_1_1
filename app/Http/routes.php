@@ -70,6 +70,11 @@ Route::get('/admin/title','Admin\Title@search');
 
 //about
 Route::resource('/admin/about', 'Admin\About');
+Route::resource('/admin/AboutObjective', 'Admin\AboutObjective');
+Route::get('/admin/AboutObjective','Admin\AboutObjective@search');
+
+Route::resource('/admin/AboutBoard', 'Admin\AboutBoard');
+Route::get('/admin/AboutBoard','Admin\AboutBoard@search');
 
 //Database
 Route::resource('/admin/database', 'Admin\Database');

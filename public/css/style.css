@@ -10,13 +10,17 @@
 
 :root {
     --nav-background-color: rgba(155, 155, 155, 0.4);
-     --light: #f8f9fa;
+    --light: #f8f9fa;
 }
 
 body {
     font-family: 'Sarabun', sans-serif; 
     margin: 0;
     padding: 0;
+
+    background-image: url('../img/bg-new.jpg');
+    background-attachment: fixed;
+    background-size: 100hv;
 }
 
 h1,
@@ -28,20 +32,8 @@ h6 {
     font-family: 'Prompt', sans-serif;
 }
 
-/* ** */
 section {
     min-height: 100vh;
-}
-
-.headerTitle {
-    padding: 4ex 0 1ex 0;
-
-    font-size: 3rem;
-    text-transform: uppercase;
-}
-
-section.detailTitle {
-    min-height: 60vh;
 }
 
 /* nav */
@@ -55,34 +47,6 @@ nav {
 nav img {
     width: 100px;
     height: 100px;
-}
-
-
-@media screen and (max-width: 1200px) {
-    nav {
-        max-height: auto;
-        margin-top: 0;
-        padding: 0;
-        background-color: var(--nav-background-color);
-    }
-
-    nav img {
-        width: auto;
-        height: 40px;
-        position: relative;
-    }
-
-    nav i {
-        
-        position: relative;
-        color: white;
-        text-shadow: 0 0 5px black;
-      }
-
-      .dropdown-menu {
-        background-color: var(--nav-background-color);
-      }
-
 }
 
 
@@ -112,20 +76,143 @@ nav a.dropdown-item:hover {
     text-shadow: 0 0 2px white;
 }
 
+@media screen and (max-width: 1200px) {
+    nav {
+        max-height: auto;
+        margin-top: 0;
+        padding: 0;
+        background-color: var(--nav-background-color);
+    }
+
+    nav img {
+        width: auto;
+        height: 40px;
+        position: relative;
+    }
+
+    nav i {
+        
+        position: relative;
+        color: white;
+        text-shadow: 0 0 5px black;
+      }
+
+      .dropdown-menu {
+        background-color: var(--nav-background-color);
+      }
+}
+
+/* card category */
+.card-img {
+    min-height: 280px;
+}
+
+.card-title {
+    min-height: 50px;
+}
+
+.card-para {
+    height: 180px;
+}
+
+.card-subject {
+    min-height: 120px;
+    justify-items: center;
+    align-items: center;
+}
+
+
+@media screen and (max-width: 1200px) {
+    .card-img {
+        min-height: 250px;
+    }
+
+    .card-subject {
+        min-height: 140px;
+        justify-items: center;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .card-img {
+        min-height: 180px;
+    }
+
+    .card-title {
+        min-height: 50px;
+    }
+    
+    .card-subject {
+        min-height: 180px;
+        justify-items: center;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .card-img {
+        min-height: 200px;
+    }
+
+    .card-title {
+        min-height: 40px;
+    }
+
+    .card-subject {
+        min-height: 160px;
+        justify-items: center;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .card-img {
+        min-height: auto;
+    }
+    .card-title {
+        min-height: auto;
+    }
+    
+    /* .card-para {
+        min-height: auto;
+    } */
+    
+    .card-subject {
+        min-height: auto;
+        justify-items: center;
+        align-items: center;
+    }
+}
+
+
 /* title */
 .titleContainerCover {
     position: relative;
 }
 
+section#title {
+    min-height: auto;
+}
 
-/* section */
-section#manuscript,
+section#intro {
+    min-height: 60vh;
+}
+
+.headerTitle {
+    padding: 4ex 0 1ex 0.5ex;
+
+    font-size: 3rem;
+    text-transform: uppercase;
+}
+
+/* section#manuscript,
 section#database,
 section#events {
     background-image: url("../img/bg-manuscript.jpg");   
     background-attachment: fixed;
     background-size: 100hv;
-}
+} */
 
 .cardLink {
     color: black;
@@ -145,7 +232,7 @@ a:hover.cardLink {
 }
 
 .card-img-top {
-    max-height: 100vh;
+    max-height: auto;
 }
 
 .cardShadow:hover {
@@ -171,15 +258,10 @@ section#titpitaka {
 /* contact */
 #footer {
     min-height: 20vh;
-
-    background-image: url('../img/footerpage.jpg');
-    background-size: 100% 100%;
 }
 
-
-/* footer */
-p.footer {
-    padding: 0;
-    margin: 0;
-}
-
+/* p.para-card {
+    height: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+} */

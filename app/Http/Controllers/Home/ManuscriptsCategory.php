@@ -52,7 +52,16 @@ class ManuscriptsCategory extends Controller
         $manuscripts_category = DB::table('mpsc_manuscripts_categories')->where('id', $id)->get();
         $manuscripts_blog = DB::table('mpsc_manuscripts_blogs')->orderBy('created_at', 'desc')->get();
 
-        return view('home.manuscripts-category', ['manuscripts_category' => $manuscripts_category,'manuscripts_blog' => $manuscripts_blog]);
+        $contact = DB::table('mpsc_contacts')->get();
+
+
+        return view('home.manuscripts-category', 
+            [
+                'manuscripts_category' => $manuscripts_category,
+                'manuscripts_blog' => $manuscripts_blog,
+                'contact' => $contact
+            ]
+        );
     }
 
     /**

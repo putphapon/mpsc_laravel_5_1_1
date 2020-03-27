@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\MpscContact;
+use Illuminate\Support\Facades\DB;
 
 class Contact extends Controller
 {
@@ -21,8 +23,10 @@ class Contact extends Controller
      */
     public function index()
     {
-        //
-        return view('admin.contact-admin');
+        //select
+        $contact = MpscContact::all();
+
+        return view('admin.contact-admin', ['contact' => $contact]);
     }
 
     /**
@@ -77,7 +81,28 @@ class Contact extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //validate
+        $this->validate($request,
+            [
+                'nameContact' => 'required',
+                'addressContact' => 'required',
+                'phoneContact' => 'required'
+            ]
+        );
+
+        //search form id
+        $contact = MpscContact::find($id);
+
+        //defind
+        $contact->contact_name = $request->nameContact;
+        $contact->contact_address = $request->addressContact;
+        $contact->contact_phone = $request->phoneContact;
+
+        
+        //save
+        $contact->save();
+
+        return  redirect()->action('Admin\Contact@index')->with('success','แก้ไขข้อมูลเรียบร้อย');
     }
 
     /**

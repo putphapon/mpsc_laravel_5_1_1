@@ -98,7 +98,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $i = 0;?>
+                    <?php $i = 0 ?>
                     @foreach ($title as $item)
                     <tr>
                         {{-- No. --}}

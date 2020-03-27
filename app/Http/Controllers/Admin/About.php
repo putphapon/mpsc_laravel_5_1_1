@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\MpscAdmin;
 
@@ -20,8 +20,16 @@ class About extends Controller
      */
     public function index()
     {
-        //
-        return view('admin.about-admin');
+        //select
+        $true = 'true';
+        $about_objective = DB::table('mpsc_about_objective')->orderBy('created_at', 'desc')->get();
+        $about_board = DB::table('mpsc_about_board')->orderBy('created_at', 'desc')->get();
+        
+        return view('admin.about-admin', [
+            'about_objective' => $about_objective,
+            'about_board' => $about_board,
+            'true' => $true
+        ]);
     }
 
     /**

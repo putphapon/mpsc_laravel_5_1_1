@@ -1,6 +1,7 @@
-<!-- footer--> 
+<!-- footer-->
 <section id="footer">
-    <div class="container">        
+    <div class="container">
+        <div class="p-1 bg-secondary"></div>
         <div class="row pt-5">
             <!-- site map-->
             <div class="col-md-4 col-sm-12">
@@ -25,34 +26,41 @@
                 <p class="font-weight-bold text-uppercase">contact us</p>
                 
                 <div class="p-3 mb-5 rounded">
+                    @foreach ($contact as $item)
                     <p class="font-weight-bolder"><i class="fa fa-address-card"></i><br>
-                    กลุ่มอนุรักษ์และศึกษา<br>คัมภีร์พระไตรปิฎกใบลาน (MPSC)</p>
+                        {{  $item->contact_name }}</p>
 
                     <p><i class="fa fa-map-marker-alt"></i><br>
-                    75-76 หมู่ 1 ต.ไทรน้อย อ.บางบาล จ.พระนครศรีอยุธยา 13250 </p>
+                        {{  $item->contact_address }}</p>
 
                     <p><i class="fa fa-phone-alt"></i><br>
-                    โทร 02-8377600 ต่อ 13670</p>
+                        {{  $item->contact_phone }}</p>
+                    @endforeach
                 </div>
             </div>
 
-            <!-- other -->
-            <div class="col-md-4 col-sm-12">
+            <!-- img -->
+            <div class="col-md-4 col-sm-12 d-flex flex-row-reverse">
+                <img src="..\img\item-footer-2.png" alt="" class="align-self-end m-0 p-0" style="max-height:50ex">
             </div>
-
         </div>
 
 
 
     <!-- copyrigth -->
-    <div class="d-flex justify-content-center flex-column pb-3">
-        <p class="h6">
+    <div class="d-flex justify-content-between flex-column">
+        {{-- admin --}}
+        <div class="m-1">
+            <a href="/auth/login" class="btn btn-outline-dark btn-sm"  role="button">เข้าสู่ระบบ</a>
+        </div>
+
+        {{-- copyright --}}
+        <p class="h6 m-1">
             <i class="fa fa-copyright"></i>
             {{ date("Y") }} - {{ date("Y")+1 }}  All Rights Reserved
         </p>
-
-        <div>
-            <a href="/auth/login" class="btn btn-outline-dark btn-sm"  role="button">เข้าสู่ระบบ</a>
-        </div>
     </div>
+
+    {{-- img --}}
+    <img src="..\img\item-footer.png" alt="" class="mw-100 m-0 p-0" >
 </section>

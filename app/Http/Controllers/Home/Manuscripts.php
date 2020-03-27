@@ -17,10 +17,17 @@ class Manuscripts extends Controller
     public function index()
     {
         //select
-        $manuscripts_category = DB::table('mpsc_manuscripts_categories')->orderBy('created_at', 'desc')->get();
+        $manuscripts_category = DB::table('mpsc_manuscripts_categories')->get();
         $manuscripts_blog = DB::table('mpsc_manuscripts_blogs')->orderBy('created_at', 'desc')->get();
+        $contact = DB::table('mpsc_contacts')->get();
 
-        return view('home.manuscripts', ['manuscripts_category' => $manuscripts_category,'manuscripts_blog' => $manuscripts_blog]);
+        return view('home.manuscripts', 
+            [
+                'manuscripts_category' => $manuscripts_category,
+                'manuscripts_blog' => $manuscripts_blog,
+                'contact' => $contact
+            ]
+        );
     
     }
 

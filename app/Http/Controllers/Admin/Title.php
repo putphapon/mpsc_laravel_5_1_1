@@ -73,8 +73,10 @@ class Title extends Controller
             
             //define Storage file
             $public_path = 'img/';
-            $destination = base_path()."/public/".$public_path;
+            //$destination = base_path()."/../public_html/".$public_path;
+            $destination = base_path()."/../public_html/".$public_path;
 
+            
             //save file
             $request->file('imageTitle')->move($destination,$image_name);
             
@@ -135,7 +137,7 @@ class Title extends Controller
         //upload file
         if($request->hasFile('imageTitle')){
             //delete file
-            $destination = base_path()."/public/";
+            $destination = "";
             unlink($destination.$title->title_image);
 
             //define Name file
@@ -143,7 +145,7 @@ class Title extends Controller
 
             //define Storage file
             $public_path = 'img/';
-            $destination = base_path()."/public/".$public_path;
+            $destination = base_path()."/../public_html/".$public_path;
 
             //save file
             $request->file('imageTitle')->move($destination,$image_name);
@@ -170,7 +172,7 @@ class Title extends Controller
         $title = MpscTitle::find($id);
 
         //delete file
-        $destination = base_path()."/public/";
+        $destination = "";
         unlink($destination.$title->title_image);
 
         //delete

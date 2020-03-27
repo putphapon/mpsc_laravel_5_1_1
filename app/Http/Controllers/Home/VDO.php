@@ -18,7 +18,15 @@ class VDO extends Controller
     {
         //select
         $vdo = DB::table('mpsc_vdos')->orderBy('created_at', 'desc')->get();
-        return view('home.vdo', ['vdo' => $vdo]);
+        $contact = DB::table('mpsc_contacts')->get();
+        
+        
+        return view('home.vdo', 
+            [
+                'vdo' => $vdo,
+                'contact' => $contact
+            ]
+        );
     }
 
     /**

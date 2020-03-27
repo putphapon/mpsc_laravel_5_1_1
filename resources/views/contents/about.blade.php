@@ -4,15 +4,9 @@
             <h1 class="headerTitle">เกี่ยวกับ</h1>
         </div>
 
-        <div class="flexTitleText">
-            <div class="col-md-6 text-center">
-                <a href="objective">
-                <button type="button" class="btn btn-primary btn-lg btn-block">วัตถุประสงค์/การดำเนินงาน</button></a>
-            </div>
-            <div class="col-md-6 text-center">
-                <a href="board">
-                <button type="button" class="btn btn-primary btn-lg btn-block">คณะที่ปรึกษา</button></a>
-            </div>
+        <div class="d-flex justify-content-between align-items-center" style="height: 120px;">
+            <a href="objective" role="button" class="btn btn-primary btn-lg btn-block m-2 h-50"><p class="align-self-center">วัตถุประสงค์/การดำเนินงาน</p> </a>
+            <a href="board" role="button" class="btn btn-primary btn-lg btn-block m-2 h-50"><p class="align-self-center">คณะที่ปรึกษา</p></a>
         </div>
     </div>
 </section>

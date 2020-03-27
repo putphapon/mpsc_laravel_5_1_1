@@ -18,7 +18,14 @@ class Shops extends Controller
     {
         //select
         $shops = DB::table('mpsc_shops')->orderBy('created_at', 'desc')->get();
-        return view('home.shops', ['shops' => $shops]);
+        $contact = DB::table('mpsc_contacts')->get();
+        
+        return view('home.shops', 
+            [
+                'shops' => $shops,
+                'contact' => $contact
+            ]
+        );
     }
 
     /**

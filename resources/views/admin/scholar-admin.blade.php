@@ -95,7 +95,7 @@
                                                     {{-- link --}}
                                                     <div class="form-group">
                                                         <label for="linkScholarBlog">ลิงก์ดาวน์โหลดไฟล์</label>
-                                                        <input type="text" name="linkScholarBlog" value="" class="form-control">
+                                                        <input type="url" name="linkScholarBlog" value="" class="form-control">
                                                         <small class="form-text text-muted">ใส่เครื่องหมาย # ถ้ายังไม่มีลิงก์</small>
                                                     </div>
                                                 </div>
@@ -232,7 +232,7 @@
                                                                 {{-- link --}}
                                                                 <div class="form-group">
                                                                     <label for="linkScholarBlog">ลิงก์ดาวน์โหลดไฟล์</label>
-                                                                    <input type="text" name="linkScholarBlog" value="{{ $item->scholar_blog_link }}" class="form-control">
+                                                                    <input type="url" name="linkScholarBlog" value="{{ $item->scholar_blog_link }}" class="form-control">
                                                                     <small class="form-text text-muted">ลิงก์แชร์ไฟล์ จาก Google Drive (*อย่าลืมเปิดแชร์ไฟล์ก่อนนำมากรอกลงฟอร์ม)</small>
                                                                 </div>
                                                             </div>

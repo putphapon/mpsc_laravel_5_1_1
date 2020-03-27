@@ -30,6 +30,9 @@ class Title extends Controller
         $events = DB::table('mpsc_events')->orderBy('events_date', 'desc')->get();
         $shops = DB::table('mpsc_shops')->orderBy('created_at', 'desc')->get();
 
+        $contact = DB::table('mpsc_contacts')->get();
+
+
         return view('home.home', 
             [   'title' => $title ,
                 'database' => $database,
@@ -39,7 +42,8 @@ class Title extends Controller
                 'manuscripts_blog' => $manuscripts_blog,
                 'vdo' => $vdo,
                 'events' => $events,
-                'shops' => $shops
+                'shops' => $shops,
+                'contact' => $contact
             ]
         );
     }

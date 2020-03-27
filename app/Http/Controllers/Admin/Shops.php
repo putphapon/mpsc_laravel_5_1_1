@@ -75,7 +75,7 @@ class Shops extends Controller
 
             //define Storage file
             $public_path = 'img/';
-            $destination = base_path()."/public/".$public_path;
+            $destination = base_path()."/../public_html/".$public_path;
 
             //save file
             $request->file('imageShops')->move($destination,$image_name);
@@ -137,7 +137,7 @@ class Shops extends Controller
         //upload file
         if($request->hasFile('imageShops')){
             //delete file
-            $destination = base_path()."/public/";
+            $destination = "";
             unlink($destination.$shops->shops_image);
             
             //define Name file
@@ -145,7 +145,7 @@ class Shops extends Controller
 
             //define Storage file
             $public_path = 'img/';
-            $destination = base_path()."/public/".$public_path;
+            $destination = base_path()."/../public_html/".$public_path;
 
             //save file
             $request->file('imageShops')->move($destination,$image_name);
@@ -172,7 +172,7 @@ class Shops extends Controller
         $shops = MpscShops::find($id);
 
         //delete file
-        $destination = base_path()."/public/";
+        $destination = "";
         unlink($destination.$shops->shops_image);
 
         //delete

@@ -50,7 +50,15 @@ class ManuscriptsBlog extends Controller
     {
         //
         $manuscripts_blog = DB::table('mpsc_manuscripts_blogs')->where('id', $id)->get();
-        return view('home.manuscripts-blog', ['manuscripts_blog' => $manuscripts_blog]);
+        
+        $contact = DB::table('mpsc_contacts')->get();
+        
+        return view('home.manuscripts-blog', 
+            [
+                'manuscripts_blog' => $manuscripts_blog,
+                'contact' => $contact
+            ]
+        );
     }
 
     /**

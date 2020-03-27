@@ -38,7 +38,7 @@ class Events extends Controller
     {
         //
     }
-
+ 
     public function search(Request $request = null)
     {
         $search = $request->search;
@@ -81,7 +81,7 @@ class Events extends Controller
 
             //define Storage file
             $public_path = 'img/';
-            $destination = base_path()."/public/".$public_path;
+            $destination = base_path()."/../public_html/".$public_path;
 
             //save file
             $request->file('imageEvents')->move($destination,$image_name);
@@ -151,7 +151,7 @@ class Events extends Controller
         //upload file
         if($request->hasFile('imageEvents')){
             //delete file
-            $destination = base_path()."/public/";
+            $destination = "";
             unlink($destination.$events->events_image);
             
             //define Name file
@@ -159,7 +159,7 @@ class Events extends Controller
 
             //define Storage file
             $public_path = 'img/';
-            $destination = base_path()."/public/".$public_path;
+            $destination = base_path()."/../public_html/".$public_path;
 
             //save file
             $request->file('imageEvents')->move($destination,$image_name);
@@ -186,7 +186,7 @@ class Events extends Controller
         $events = MpscEvents::find($id);
         
         //delete file
-        $destination = base_path()."/public/";
+        $destination = "";
         unlink($destination.$events->events_image);
 
         //delete

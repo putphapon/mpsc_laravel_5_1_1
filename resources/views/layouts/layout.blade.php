@@ -18,14 +18,49 @@
 <!-- icon -->
 <link rel="shortcut icon" href="/img/logo/logo-mpsc.png" type="image/x-icon">
 
-<title>@yield('title-bar') | Manuscript Preservation and Study Center</title>
+
+<?php 
+    if (isset($manuscripts_blog)) {
+        $j = 0;
+        foreach ($manuscripts_blog as $item) {
+            if ($j <= 0) {
+
+                $temp_title = $item->manuscripts_blog_name;
+                $temp_url = "http://www.mps-center.in.th";
+                $temp_type = "website";
+                $temp_description = $item->manuscripts_blog_detail;
+                $temp_image = $item->manuscripts_blog_image;
+                
+                $j++;
+            }
+        }
+    } 
+    else {
+        $temp_title = "กลุ่มอนุรักษ์และศึกษาคัมภีร์พระไตรปิฎกใบลาน";
+        $temp_url = "http://www.mps-center.in.th";
+        $temp_type = "website";
+        $temp_description = "Maunscript Preservation and Study";
+        $temp_image = "https://www.your-domain.com/path/image.jpg";
+    }
+?>
+
+<meta property="og:title"         content={{ strval($temp_title) }}/>
+<meta property="og:url"           content={{ strval($temp_url) }}/>
+<meta property="og:type"          content={{ strval($temp_type) }}/>
+<meta property="og:description"   content={{ strval($temp_description) }}/>
+<meta property="og:image"           content={{ asset($temp_image) }}>
+
+
+<title>@yield('title-bar') | กลุ่มอนุรักษ์และศึกษาคัมภีร์พระไตรปิฎกใบลาน</title>
 
 </head>
 <body>
-
+{{-- nav --}}
 @include('layouts.nav')
 
-@yield('content')
+<div class="container">
+    @yield('content')
+</div>
 
 @include('layouts.footer')
 
@@ -34,6 +69,16 @@
 
 <!-- Google Search Custom -->
 <script async src="https://cse.google.com/cse.js?cx=008341805127915127433:42dxa5yxayl"></script>
+
+{{-- fb share --}}
+<div id="fb-root"></div>
+<script 
+    async defer crossorigin="anonymous" 
+    src="https://connect.facebook.net/th_TH/sdk.js#xfbml=1&version=v6.0&appId=497542534276270&autoLogAppEvents=1">
+</script>
+
+{{-- line share --}}
+<script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
 
 <script>
     window.dataLayer = window.dataLayer || [];

@@ -51,7 +51,7 @@
                                         {{-- link --}}
                                         <div class="form-group">
                                             <label for="linkDatabase">URL ฐานข้อมูล</label>
-                                            <input type="text" name="linkDatabase" value="" class="form-control">
+                                            <input type="url" name="linkDatabase" value="" class="form-control">
                                             <small class="form-text text-muted">ใส่เครื่องหมาย # ถ้ายังไม่มีลิงก์</small>
                                         </div>
                                         
@@ -121,7 +121,7 @@
                             <img
                             src="{{ asset($item->database_image) }}"
                             alt="{{ $item->database_name }}"
-                            class="rounded" style="height: 100px;">
+                            class="rounded" style="max-height:100px;max-width:100px;">
                         </td>
                         {{-- Edit --}}
                         <td>
@@ -155,7 +155,7 @@
                                                         {{-- link --}}
                                                         <div class="form-group">
                                                             <label for="linkDatabase">URL ฐานข้อมูล</label>
-                                                            <input type="text" name="linkDatabase" value="{{ $item->database_link }}" class="form-control">                                   
+                                                            <input type="url" name="linkDatabase" value="{{ $item->database_link }}" class="form-control">                                   
                                                             <small class="form-text text-muted">ใส่เครื่องหมาย # ถ้ายังไม่มีลิงก์</small>
                                                         </div>
 

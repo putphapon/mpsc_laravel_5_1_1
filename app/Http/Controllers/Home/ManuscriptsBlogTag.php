@@ -40,7 +40,11 @@ class ManuscriptsBlogTag extends Controller
     public function store(Request $request)
     {
         //
+        
+        
+
         $id = $request->search;
+        
         if($id != '#') {
             $search = $id;
     
@@ -59,11 +63,16 @@ class ManuscriptsBlogTag extends Controller
             $manuscripts_blog = null;
         }
 
-        return view('home.manuscripts-blog-tag', [
-            'manuscripts_blog' => $manuscripts_blog,
-            'manuscripts_category' => $manuscripts_category,
-            'search' => $search
-        ]);
+        $contact = DB::table('mpsc_contacts')->get();
+        
+        return view('home.manuscripts-blog-tag', 
+            [
+                'manuscripts_blog' => $manuscripts_blog,
+                'manuscripts_category' => $manuscripts_category,
+                'search' => $search,
+                'contact' => $contact
+            ]
+        );
     }
 
     /**
@@ -93,10 +102,13 @@ class ManuscriptsBlogTag extends Controller
             $manuscripts_blog = null;
         }
 
+        $contact = DB::table('mpsc_contacts')->get();
+
         return view('home.manuscripts-blog-tag', [
             'manuscripts_blog' => $manuscripts_blog,
             'manuscripts_category' => $manuscripts_category,
-            'search' => $search
+            'search' => $search,
+            'contact' => $contact
         ]);
     }
 

@@ -17,9 +17,15 @@ class Database extends Controller
     public function index()
     {
         //select
-        $database = DB::table('mpsc_databases')->orderBy('created_at', 'desc')->get();
+        $database = DB::table('mpsc_databases')->get();
+        $contact = DB::table('mpsc_contacts')->get();
 
-        return view('home.database', ['database' => $database]);
+        return view('home.database', 
+            [
+                'database' => $database,
+                'contact' => $contact
+            ]
+        );
     }
 
     /**

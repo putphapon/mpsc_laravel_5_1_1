@@ -47,7 +47,7 @@
                                             <input type="text" name="nameShops" value="" class="form-control">
                                         </div>
 
-                                        {{-- image --}}
+                                        {{-- image --}} 
                                         <div class="form-group">
                                             <label for="imageShops">รูปภาพ</label>
                                             <input type="file" class="form-control-file"  name="imageShops" value="">
@@ -56,7 +56,7 @@
                                         {{--link --}}
                                         <div class="form-group">
                                             <label for="linkShops">link อ่านหนังสือ</label>
-                                            <input type="text" name="linkShops" value="" class="form-control">
+                                            <input type="url" name="linkShops" value="" class="form-control">
                                             <small class="form-text text-muted">ใส่เครื่องหมาย # ถ้ายังไม่มีลิงก์</small>
                                         </div>
                                     </div>
@@ -166,7 +166,7 @@
                                                         {{--link --}}
                                                         <div class="form-group">
                                                             <label for="linkShops">link อ่านหนังสือ</label>
-                                                            <input type="text" name="linkShops" value="{{ $item->shops_link }}" class="form-control">
+                                                            <input type="url" name="linkShops" value="{{ $item->shops_link }}" class="form-control">
                                                             <small class="form-text text-muted">ใส่เครื่องหมาย # ถ้ายังไม่มีลิงก์</small>
                                                         </div>
                                                     </div>

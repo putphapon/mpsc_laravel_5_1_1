@@ -86,6 +86,13 @@
                                                         <input type="file" name="imageManuscriptsBlog" value="" class="form-control-file">
                                                     </div>
 
+                                                    {{-- reference --}}
+                                                    <div class="form-group">
+                                                        <label for="referenceManuscriptsBlog">แหล่งที่มา</label>
+                                                        <input type="text" name="referenceManuscriptsBlog" value="" class="form-control">
+                                                        <small class="form-text text-muted">ใส่เครื่องหมาย # ถ้ายังไม่มีข้อมูล</small>
+                                                    </div>
+
                                                     {{-- catagory --}}
                                                     <div class="form-group">
                                                         <label for="idManuscriptsCategory">หมวด</label>
@@ -109,7 +116,7 @@
                                                     {{-- link --}}
                                                     <div class="form-group">
                                                         <label for="linkManuscriptsBlog">ลิงก์ดาวน์โหลดไฟล์</label>
-                                                        <input type="text" name="linkManuscriptsBlog" value="" class="form-control">
+                                                        <input type="url" name="linkManuscriptsBlog" value="" class="form-control">
                                                         <small class="form-text text-muted">ลิงก์แชร์ไฟล์ จาก Google Drive (*อย่าลืมเปิดแชร์ไฟล์ก่อนนำมากรอกลงฟอร์ม)</small>
                                                         <small class="form-text text-muted">ใส่เครื่องหมาย # ถ้ายังไม่มีลิงก์</small>
                                                     </div>
@@ -162,6 +169,7 @@
                                     <th scope="col">ชื่อบทความ</th>
                                     <th scope="col">คำเกริ่น</th>
                                     <th scope="col">รูปภาพบทความ</th>
+                                    <th scope="col">แหล่งที่มา</th>
                                     <th scope="col">หมวด</th>
                                     <th scope="col">แท๊ก</th>
                                     <th scope="col">ไฟล์</th>
@@ -178,7 +186,11 @@
                                     {{-- Name --}}
                                     <td>{{ $item->manuscripts_blog_name }}</td>
                                     {{-- detail --}}
-                                    <td>{{ $item->manuscripts_blog_detail }}</td>
+                                    <td>
+                                        <div class="overflow-auto p-3 mb-2" style="max-height: 150px;" >
+                                            {{ $item->manuscripts_blog_detail }}
+                                        </div>
+                                    </td>
                                     {{-- Image --}}
                                     <td>
                                         <img
@@ -186,6 +198,9 @@
                                         alt="{{ $item->manuscripts_blog_name }}"
                                         class="rounded" style="height: 100px;">
                                     </td>
+                                    
+                                    {{-- Reference --}}
+                                    <td>{{ $item->manuscripts_blog_reference }}</td>
                                     
                                     {{-- Category --}}
                                     @foreach ($manuscripts_category as $subitem) 
@@ -195,7 +210,11 @@
                                     @endforeach
 
                                     {{-- Tag --}}
-                                    <td>{{ $item->manuscripts_blog_tag }}</td>
+                                    <td>
+                                        <div class="overflow-auto p-3 mb-2" style="max-height: 150px;" >
+                                            {{ $item->manuscripts_blog_tag }}
+                                        </div>
+                                    </td>
 
                                     {{-- Link --}}
                                     <td>
@@ -246,7 +265,13 @@
                                                                         <label for="imageManuscriptsBlog">รูปภาพบทความ :: {{ substr($item->manuscripts_blog_image,4) }}</label>
                                                                         <input type="file" name="imageManuscriptsBlog" value="" class="form-control-file">
                                                                         <img src="{{ asset($item->manuscripts_blog_image) }}" alt="{{ $item->manuscripts_blog_name }}" class="p-2 rounded" style="height: 100px;">
-                                                                    </div> 
+                                                                    </div>
+
+                                                                    {{-- Reference --}}
+                                                                    <div class="form-group">
+                                                                        <label for="referenceManuscriptsBlog">แหล่งที่มา</label>
+                                                                        <input type="text" name="referenceManuscriptsBlog" value="{{ $item->manuscripts_blog_reference }}" class="form-control">
+                                                                    </div>
                                                                     
                                                                     {{-- category --}}
                                                                     <div class="form-group">
@@ -275,7 +300,7 @@
                                                                     {{-- link --}}
                                                                     <div class="form-group">
                                                                         <label for="linkManuscriptsBlog">ลิงก์ดาวน์โหลดไฟล์</label>
-                                                                        <input type="text" name="linkManuscriptsBlog" value="{{ $item->manuscripts_blog_link }}" class="form-control">
+                                                                        <input type="url" name="linkManuscriptsBlog" value="{{ $item->manuscripts_blog_link }}" class="form-control">
                                                                         <small class="form-text text-muted">ลิงก์แชร์ไฟล์ จาก Google Drive (*อย่าลืมเปิดแชร์ไฟล์ก่อนนำมากรอกลงฟอร์ม)</small>
                                                                         <small class="form-text text-muted">ใส่เครื่องหมาย # ถ้ายังไม่มีลิงก์</small>
                                                                     </div>

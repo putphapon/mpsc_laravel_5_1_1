@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -16,8 +16,16 @@ class AboutObjective extends Controller
      */
     public function index()
     {
-        //
-        return view('home.about-objective');
+        //select
+        $contact = DB::table('mpsc_contacts')->get();
+        $about_objective = DB::table('mpsc_about_objective')->get();
+
+        return view('home.about-objective', 
+            [
+                'about_objective' => $about_objective,
+                'contact' => $contact
+            ]
+        );
     }
 
     /**

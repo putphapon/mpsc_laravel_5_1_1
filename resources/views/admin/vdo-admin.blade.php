@@ -56,7 +56,7 @@
                                         {{-- link --}}
                                         <div class="form-group">
                                             <label for="linkVDO">ลิงก์ VDO Youtube</label>
-                                            <input type="text" name="linkVDO" value="" class="form-control">
+                                            <input type="url" name="linkVDO" value="" class="form-control">
                                             <small class="form-text text-muted">เข้า Youtube แล้วไปที่ Share -> Embed ก๊อปปี้ข้อความนี้มากรอกลง<br>'https://www.youtube.com/embed/xxxxxxxxxx'</small>
                                         </div>
                                     </div>
@@ -161,7 +161,7 @@
                                                         {{-- link --}}
                                                         <div class="form-group">
                                                             <label for="linkVDO">ลิงก์ VDO Youtube</label>
-                                                            <input type="text" name="linkVDO" value="{{ $item->vdo_link }}" class="form-control">
+                                                            <input type="url" name="linkVDO" value="{{ $item->vdo_link }}" class="form-control">
                                                             <small class="form-text text-muted">เข้า Youtube แล้วไปที่ Share -> Embed ก๊อปปี้ข้อความนี้มากรอกลง<br>'https://www.youtube.com/embed/xxxxxxxxxx'</small>
                                                         </div>
                                                     </div>

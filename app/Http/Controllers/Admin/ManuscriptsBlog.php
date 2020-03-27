@@ -108,6 +108,7 @@ class ManuscriptsBlog extends Controller
         $manuscripts_blog->manuscripts_blog_name = $request->nameManuscriptsBlog;
         $manuscripts_blog->manuscripts_blog_detail = $request->detailManuscriptsBlog;
         $manuscripts_blog->manuscripts_category_id = $request->idManuscriptsCategory;
+        $manuscripts_blog->manuscripts_blog_reference = $request->referenceManuscriptsBlog;
         $manuscripts_blog->manuscripts_blog_tag = $request->tagManuscriptsBlog;
         $manuscripts_blog->manuscripts_blog_link = $request->linkManuscriptsBlog;
 
@@ -118,7 +119,7 @@ class ManuscriptsBlog extends Controller
 
             //define Storage file
             $public_path = 'img/';
-            $destination = base_path()."/public/".$public_path;
+            $destination = base_path()."/../public_html/".$public_path;
 
             //save file
             $request->file('imageManuscriptsBlog')->move($destination,$image_name);
@@ -182,13 +183,14 @@ class ManuscriptsBlog extends Controller
         $manuscripts_blog->manuscripts_blog_name = $request->nameManuscriptsBlog;
         $manuscripts_blog->manuscripts_blog_detail = $request->detailManuscriptsBlog;
         $manuscripts_blog->manuscripts_category_id = $request->idManuscriptsCategory;
+        $manuscripts_blog->manuscripts_blog_reference = $request->referenceManuscriptsBlog;
         $manuscripts_blog->manuscripts_blog_tag = $request->tagManuscriptsBlog;
         $manuscripts_blog->manuscripts_blog_link = $request->linkManuscriptsBlog;
 
         //upload file
         if($request->hasFile('imageManuscriptsBlog')){
             //delete file
-            $destination = base_path()."/public/";
+            $destination = "";
             unlink($destination.$manuscripts_blog->manuscripts_blog_image);
             
             //define Name file
@@ -196,7 +198,7 @@ class ManuscriptsBlog extends Controller
 
             //define Storage file
             $public_path = 'img/';
-            $destination = base_path()."/public/".$public_path;
+            $destination = base_path()."/../public_html/".$public_path;
 
             //save file
             $request->file('imageManuscriptsBlog')->move($destination,$image_name);
@@ -223,7 +225,7 @@ class ManuscriptsBlog extends Controller
         $manuscripts_blog = MpscManuscriptsBlog::find($id);
 
         //delete file
-        $destination = base_path()."/public/";
+        $destination = "";
         unlink($destination.$manuscripts_blog->manuscripts_blog_image);
 
         //delete

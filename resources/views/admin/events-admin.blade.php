@@ -76,7 +76,7 @@
                                         {{-- link image Google Drive --}}
                                         <div class="form-group">
                                             <label for="linkImageEvents">link แฟ้มรูปภาพ</label>
-                                            <input type="text" name="linkImageEvents" value="" class="form-control">
+                                            <input type="url" name="linkImageEvents" value="" class="form-control">
                                             <small class="form-text text-muted">ลิงก์แชร์แฟ้มรูปภาพ จาก Google Drive (*อย่าลืมเปิดแชร์แฟ้มก่อนนำมากรอกลงฟอร์ม)</small> 
                                             <small class="form-text text-muted">ใส่เครื่องหมาย # ถ้ายังไม่มีลิงก์</small>
                                         </div>
@@ -225,7 +225,7 @@
                                                         {{-- link image Google Drive --}}
                                                         <div class="form-group">
                                                             <label for="linkImageEvents">link แฟ้มรูปภาพ</label>
-                                                            <input type="text" name="linkImageEvents" value="{{ $item->events_linkImage }}" class="form-control">
+                                                            <input type="url" name="linkImageEvents" value="{{ $item->events_linkImage }}" class="form-control">
                                                             <small class="form-text text-muted">ลิงก์แชร์แฟ้มรูปภาพ จาก Google Drive (*อย่าลืมเปิดแชร์แฟ้มก่อนนำมากรอกลงฟอร์ม)</small>
                                                             <small class="form-text text-muted">ใส่เครื่องหมาย # ถ้ายังไม่มีลิงก์</small>
                                                         </div>

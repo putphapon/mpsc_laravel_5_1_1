@@ -18,8 +18,13 @@ class Events extends Controller
     {
         //select
         $events = DB::table('mpsc_events')->orderBy('created_at', 'desc')->get();
+        $contact = DB::table('mpsc_contacts')->get();
 
-        return view('home.events', ['events' => $events]);
+        return view('home.events', 
+            [
+                'events' => $events,
+                'contact' => $contact
+            ]);
     }
 
     /**

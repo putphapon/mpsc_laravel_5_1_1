@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -16,8 +16,16 @@ class AboutBoard extends Controller
      */
     public function index()
     {
-        //
-        return view('home.about-board');
+        //select
+        $contact = DB::table('mpsc_contacts')->get();
+        $about_board = DB::table('mpsc_about_board')->get();
+
+        return view('home.about-board', 
+            [
+                'about_board' => $about_board,
+                'contact' => $contact
+            ]
+        );
     }
 
     /**

@@ -90,7 +90,7 @@ class ManuscriptsCategory extends Controller
 
             //define Storage file
             $public_path = 'img/';
-            $destination = base_path()."/public/".$public_path;
+            $destination = base_path()."/../public_html/".$public_path;
 
             //save file
             $request->file('imageManuscriptsCategory')->move($destination,$image_name);
@@ -145,7 +145,7 @@ class ManuscriptsCategory extends Controller
         ); 
 
         //search from id
-        $manuscripts_category = MpscManuscriptsCategory::if($id);
+        $manuscripts_category = MpscManuscriptsCategory::find($id);
 
         //define
         $manuscripts_category->manuscripts_category_name = $request->nameManuscriptsCategory;
@@ -154,7 +154,7 @@ class ManuscriptsCategory extends Controller
         //upload file
         if($request->hasFile('imageManuscriptsCategory')){
             //delete file
-            $destination = base_path()."/public/";
+            $destination = "";
             unlink($destination.$manuscripts_category->manuscripts_category_image);
             
             //define Name file
@@ -162,7 +162,7 @@ class ManuscriptsCategory extends Controller
 
             //define Storage file
             $public_path = 'img/';
-            $destination = base_path()."/public/".$public_path;
+            $destination = base_path()."/../public_html/".$public_path;
 
             //save file
             $request->file('imageManuscriptsCategory')->move($destination,$image_name);
@@ -186,10 +186,10 @@ class ManuscriptsCategory extends Controller
     public function destroy($id)
     {
         //search from id
-        $manuscripts_category = MpscManuscriptsCategory::if($id);
+        $manuscripts_category = MpscManuscriptsCategory::find($id);
         
         //delete file
-        $destination = base_path()."/public/";
+        $destination = "";
         unlink($destination.$manuscripts_category->manuscripts_category_image);
         
         //delete

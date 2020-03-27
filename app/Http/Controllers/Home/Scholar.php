@@ -19,8 +19,15 @@ class Scholar extends Controller
         //select
         $scholar_category = DB::table('mpsc_scholar_categories')->orderBy('created_at', 'desc')->get();
         $scholar_blog = DB::table('mpsc_scholar_blogs')->orderBy('created_at', 'desc')->get();
+        $contact = DB::table('mpsc_contacts')->get();
 
-        return view('home.scholar', ['scholar_category' => $scholar_category,'scholar_blog' => $scholar_blog]);
+
+        return view('home.scholar', 
+            [
+                'scholar_category' => $scholar_category,
+                'scholar_blog' => $scholar_blog,
+                'contact' => $contact
+            ]);
     }
 
     /**

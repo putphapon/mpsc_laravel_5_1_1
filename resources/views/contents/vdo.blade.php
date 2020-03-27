@@ -7,14 +7,14 @@
         <!-- section content -->
         <div class="d-flex justify-content-around">
             @foreach ($vdo as $item)
-                <div class="col-md-4">
+                <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="card cardShadow bg-transparent">
                         <div class="embed-responsive embed-responsive-16by9">
                             <iframe class="embed-responsive-item" src="{{ $item->vdo_link }}" allowfullscreen></iframe>
                         </div>
-                        <div class="p-3">
-                            <h5 class="card-title pt-3 text-center">{{ $item->vdo_name }}"</h5>
-                            <p>{{ $item->vdo_detail }}"</p>
+                        <div class="p-1">
+                            <h5 class="card-title pt-1 text-center">{{ $item->vdo_name }}</h5>
+                            <p>{{ $item->vdo_detail }}</p>
                         </div>
                     </div>
                 </div>
