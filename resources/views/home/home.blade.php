@@ -34,24 +34,31 @@
                 @endif
                 <?php $i++ ?>
             @endforeach
-            </div>
+        </div>
+        
+        <div class="d-flex flex-row-reverse mr-3">
+            {{-- <!-- Histats.com  (div with counter) --> --}}
+            <div id="histats_counter"></div>
+        </div>
+
+
         </div>
     {{-- </div> --}}
 </section>
     
 {{-- intro --}}
-<section id="intro">
-    <div class="d-flex justify-content-center text-center" style="min-height:50vh">
-        <div class="align-self-center ">
+<div>
+    <div class="d-flex justify-content-center text-center" style="min-height:30vh">
+        <div class="align-self-center">
             <h1>กิจของเรา... ไม่ใช่เพื่อประโยชน์ของตนเอง<br>
                 แต่เพื่อให้เป็นความดี...แก่ผู้ที่จะมาในภายหลัง</h1>
             <p class="text-muted blockquote-footer">พุทธวจนะ</p>
         </div>
     </div>
-    <div class="m-0 p-0 h-25">
-        <img src="..\img\item-intro.png" alt="" class="mw-100 m-0 p-0" style="max-height:auto">
+    <div class="m-0 p-0">
+        <img src="..\img\item-intro.png" alt="" class="w-100 m-0 p-0">
     </div>
-</section>
+</div>
 
 {{-- database --}}
 <section id="database">
@@ -161,15 +168,15 @@
         <!-- section content -->
         <div class="row pt-3 pb-3">
             @foreach ($manuscripts_category as $item)
-                <div class="col-md-4 col-sm-6 pb-5">
+                <div class="col-md-4 col-sm-6 pb-2">
                     <div class="card cardShadow bg-transparent">
                         <div class="card-img">
-                            <img src="{{ asset($item->manuscripts_category_image) }}" class="card-img-top" style="max-height: 250px;" alt=" ">
+                            <img src="{{ asset($item->manuscripts_category_image) }}" class="card-img-top" alt="{{$item->manuscripts_category_name}}">
                         </div>
                         
                         <h5 class="card-title pt-3 text-center"><i class="fa fa-books"></i>  {{$item->manuscripts_category_name}}</h5>
                         
-                        <div class="card-subject pr-3 pl-3">
+                        <div class="card-detail pr-3 pl-3">
                             <p>{{$item->manuscripts_category_detail}}</p>
                         </div>
 

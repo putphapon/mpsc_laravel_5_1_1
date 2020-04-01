@@ -39,7 +39,7 @@
         $temp_title = "กลุ่มอนุรักษ์และศึกษาคัมภีร์พระไตรปิฎกใบลาน";
         $temp_url = "http://www.mps-center.in.th";
         $temp_type = "website";
-        $temp_description = "Maunscript Preservation and Study";
+        $temp_description = "Maunscript Preservation and Study Center";
         $temp_image = "https://www.your-domain.com/path/image.jpg";
     }
 ?>
@@ -58,11 +58,12 @@
 {{-- nav --}}
 @include('layouts.nav')
 
-<div class="container">
+<div class="container-xl">
     @yield('content')
 </div>
 
 @include('layouts.footer')
+
 
 <!-- Google Analytic -->
 <script async src='https://www.googletagmanager.com/gtag/js?id=UA-145708508-1'></script>
@@ -80,6 +81,7 @@
 {{-- line share --}}
 <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
 
+{{-- Google Analytic --}}
 <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -87,6 +89,19 @@
 
     gtag('config', 'UA-145708508-1');
 </script>
+
+<!-- Histats.com  START  (aync)-->
+<script type="text/javascript">var _Hasync= _Hasync|| [];
+    _Hasync.push(['Histats.start', '1,4386241,4,605,110,55,00011001']);
+    _Hasync.push(['Histats.fasi', '1']);
+    _Hasync.push(['Histats.track_hits', '']);
+    (function() {
+    var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+    hs.src = ('//s10.histats.com/js15_as.js');
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+    })();
+</script>
+<!-- Histats.com  END  -->
 
 <!-- JavaScript -->
 <script src="{{asset('/js/jquery.js')}}"></script>

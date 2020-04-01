@@ -18,7 +18,7 @@
             <br>
 
             <div>
-                <h5>เบอร์โทรศัทพ์</h5>
+                <h5>เบอร์โทรศัพท์</h5>
                 <h3>{{  $item->contact_phone }}</h3>
             </div>
         @endforeach

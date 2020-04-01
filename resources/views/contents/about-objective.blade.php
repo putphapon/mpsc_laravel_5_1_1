@@ -7,7 +7,7 @@
     
         @foreach ($about_objective as $item)
         <div class="row">
-            <div class="col">
+            <div class="col WYSIWYGtext">
                 <h3 class="bg-light p-4">{{ $item->about_objective_subject}}</h3>
                 <p>
                     {!! $item->about_objective_detail !!}

@@ -32,6 +32,19 @@ h6 {
     font-family: 'Prompt', sans-serif;
 }
 
+.WYSIWYGtext h1,
+.WYSIWYGtext h2,
+.WYSIWYGtext h3,
+.WYSIWYGtext h4,
+.WYSIWYGtext h5,
+.WYSIWYGtext h6 {
+    font-family: 'Prompt', sans-serif;
+}
+
+.WYSIWYGtext p {
+    font-family: 'Sarabun', sans-serif;
+}
+
 section {
     min-height: 100vh;
 }
@@ -104,8 +117,9 @@ nav a.dropdown-item:hover {
 
 /* card category */
 .card-img {
-    min-height: 280px;
+    min-height: 200px;
 }
+
 
 .card-title {
     min-height: 50px;
@@ -115,8 +129,15 @@ nav a.dropdown-item:hover {
     height: 180px;
 }
 
-.card-subject {
+
+.card-detail {
     min-height: 120px;
+    justify-items: center;
+    align-items: center;
+}
+
+.card-subject {
+    min-height: 100px;
     justify-items: center;
     align-items: center;
 }
@@ -124,11 +145,17 @@ nav a.dropdown-item:hover {
 
 @media screen and (max-width: 1200px) {
     .card-img {
-        min-height: 250px;
+        min-height: 180px;
+    }
+    
+    .card-detail {
+        min-height: 130px;
+        justify-items: center;
+        align-items: center;
     }
 
     .card-subject {
-        min-height: 140px;
+        min-height: 100px;
         justify-items: center;
         align-items: center;
     }
@@ -136,23 +163,29 @@ nav a.dropdown-item:hover {
 
 @media screen and (max-width: 992px) {
     .card-img {
-        min-height: 180px;
+        min-height: 160px;
     }
 
     .card-title {
         min-height: 50px;
     }
     
+    .card-detail {
+        min-height: 200px;
+        justify-items: center;
+        align-items: center;
+    }
+
     .card-subject {
-        min-height: 180px;
+        min-height: 100px;
         justify-items: center;
         align-items: center;
     }
 }
 
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
     .card-img {
-        min-height: 200px;
+        min-height: 180px;
     }
 
     .card-title {
@@ -160,7 +193,7 @@ nav a.dropdown-item:hover {
     }
 
     .card-subject {
-        min-height: 160px;
+        min-height: 140px;
         justify-items: center;
         align-items: center;
     }
@@ -174,16 +207,16 @@ nav a.dropdown-item:hover {
         min-height: auto;
     }
     
-    /* .card-para {
+    .card-para {
         min-height: auto;
-    } */
+    }
     
     .card-subject {
         min-height: auto;
         justify-items: center;
         align-items: center;
     }
-}
+} */
 
 
 /* title */
@@ -196,13 +229,13 @@ section#title {
 }
 
 section#intro {
-    min-height: 60vh;
+    height: 20vh;
 }
 
 .headerTitle {
     padding: 4ex 0 1ex 0.5ex;
 
-    font-size: 3rem;
+    font-size: 2rem;
     text-transform: uppercase;
 }
 

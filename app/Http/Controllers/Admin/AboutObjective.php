@@ -120,7 +120,7 @@ class AboutObjective extends Controller
 
         //defind
         $about_objective->about_objective_subject = $request->subjectAboutObjective;
-        $about_objective->aabout_objective_detail = $request->detailAboutObjective;
+        $about_objective->about_objective_detail = $request->detailAboutObjective;
         
         //save
         $about_objective->save();

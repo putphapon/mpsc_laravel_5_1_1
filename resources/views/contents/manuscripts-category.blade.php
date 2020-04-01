@@ -6,8 +6,8 @@
             <h1 class="headerTitle ">{{$item->manuscripts_category_name}}</h1>
         </div>
 
-        <div class="row">
-            <img src="{{ asset($item->manuscripts_category_image) }}" class="rounded-bottom cardShadow w-100">
+        <div class="m-0 p-0">
+            <img src="{{ asset($item->manuscripts_category_image) }}" class="rounded-bottom cardShadow mw-100 m-0 p-0">
             <p class="m-5 pt-2 lead">{{$item->manuscripts_category_detail}}</p>
         </div>
 
@@ -16,7 +16,7 @@
                 @if ($subitem->manuscripts_category_id == $item->id) 
                 <div class="col-md-4 col-sm-6 mb-3 p-3">
                     <div class="card cardShadow bg-transparent">
-                        <div class="card-img pb-2">
+                        <div class="card-img pb-2" >
                             <img src="{{ asset($subitem->manuscripts_blog_image) }}" class="card-img-top rounded " alt="">
                         </div>
 

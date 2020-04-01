@@ -31,13 +31,13 @@
         @foreach ($manuscripts_category as $item)
             <div class="col-md-4 col-sm-6 pb-5">
                 <div class="card cardShadow bg-transparent">
-                    <div class="card-img">
-                        <img src="{{ asset($item->manuscripts_category_image) }}" class="card-img-top" style="max-height: 250px;" alt=" ">
+                    <div class="card-img"  >
+                        <img src="{{ asset($item->manuscripts_category_image) }}" class="card-img-top" alt="{{$item->manuscripts_category_name}}" style="max-height: 250px;" >
                     </div>
                     
                     <h5 class="card-title pt-3 text-center"><i class="fa fa-books"></i>{{$item->manuscripts_category_name}}</h5>
                     
-                    <div class="card-subject pr-3 pl-3">
+                    <div class="card-detail pr-3 pl-3">
                         <p>{{$item->manuscripts_category_detail}}</p>
                     </div>
 

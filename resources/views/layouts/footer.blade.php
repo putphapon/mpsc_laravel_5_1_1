@@ -1,6 +1,6 @@
 <!-- footer-->
 <section id="footer">
-    <div class="container">
+    <div class="container-xl">
         <div class="p-1 bg-secondary"></div>
         <div class="row pt-5">
             <!-- site map-->
@@ -41,7 +41,7 @@
 
             <!-- img -->
             <div class="col-md-4 col-sm-12 d-flex flex-row-reverse">
-                <img src="..\img\item-footer-2.png" alt="" class="align-self-end m-0 p-0" style="max-height:50ex">
+                <img src="..\img\item-footer-2.png" alt="" class="align-self-end m-0 mb-5 p-0" style="max-height:40vh">
             </div>
         </div>
 
@@ -61,6 +61,8 @@
         </p>
     </div>
 
-    {{-- img --}}
-    <img src="..\img\item-footer.png" alt="" class="mw-100 m-0 p-0" >
 </section>
+{{-- img --}}
+<div class="m-0 p-0 overflow-hidden" style="width:100vw;height:auto;">
+    <img src="..\img\item-footer.png" alt="" class="ml-n5 mr-n5 mb-n3 pl-n5 pr-n5 pb-n4 h-auto" style="width:120%;>
+</div>

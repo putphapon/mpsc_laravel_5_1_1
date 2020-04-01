@@ -132,7 +132,7 @@
                                     <td>{{ $item->about_objective_subject }}</td>
                                     {{-- detail --}}
                                     <td>
-                                        <div class="overflow-auto p-3 mb-2" style="max-height: 150px;" >
+                                        <div class="overflow-auto p-3 mb-2 WYSIWYGtext" style="max-height: 150px;" >
                                             {!! $item->about_objective_detail !!}
                                         </div>
                                     </td>
