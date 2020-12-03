@@ -56,7 +56,7 @@
         </div>
     </div>
     <div class="m-0 p-0">
-        <img src="..\img\item-intro.png" alt="" class="w-100 m-0 p-0">
+        <img src="..\img\item-intro.png" alt="" class="d-none w-100 m-0 p-0 scoll">
     </div>
 </div>
 

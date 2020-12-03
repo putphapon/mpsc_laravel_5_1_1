@@ -83,11 +83,11 @@ class Events extends Controller
             $public_path = 'img/';
             $destination = base_path()."/../public_html/".$public_path;
 
-            //save file
+            //save file 
             $request->file('imageEvents')->move($destination,$image_name);
             
             //add name to database field
-            $events->events_image = $public_path.$image_name;
+            $events->events_าimage = $public_path.$image_name;
         }
 
         //save

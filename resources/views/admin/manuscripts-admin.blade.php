@@ -269,7 +269,7 @@
 
                                                                     {{-- Reference --}}
                                                                     <div class="form-group">
-                                                                        <label for="referenceManuscriptsBlog">แหล่งที่มา</label>
+                                                                        <label for="referenceManuscriptsBlog">แหล่งที่มา</label> 
                                                                         <input type="text" name="referenceManuscriptsBlog" value="{{ $item->manuscripts_blog_reference }}" class="form-control">
                                                                     </div>
                                                                     

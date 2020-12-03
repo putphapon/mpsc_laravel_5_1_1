@@ -10,6 +10,7 @@
                     <ul class="list-unstyled">
                         <li><a class="text-decoration-none" href="/">หน้าหลัก</a></li>
                         <li><a class="text-decoration-none" href="{{ action('Home\About@index') }}">เกี่ยวกับ</a></li>
+                        <li><a class="text-decoration-none" href="{{ action('Home\Work@index') }}">งาน</a></li>
                         <li><a class="text-decoration-none" href="{{ action('Home\Database@index') }}">ฐานข้อมูล</a></li>
                         <li><a class="text-decoration-none" href="{{ action('Home\Scholar@index') }}">บทความวิชาการ/งานวิจัย</a></li>
                         <li><a class="text-decoration-none" href="{{ action('Home\Manuscripts@index') }}">ธารความรู้</a></li>
@@ -45,21 +46,45 @@
             </div>
         </div>
 
+        {{-- sponsor --}}
+        <?php
+            $sponsor = [
+                '1. มูลนิธิธรรมชัย.png',
+                '2. DTP.png',
+                '3. SAT_Tokyo.png',
+                '4. Hsuan Chuang University  Taiwan.png',
+                '5. Myanmar@SPSU (Yangon).png',
+                '6. Myanmar@SPSU (Mandalay).png',
+                '7. Myanmar@ITBMU.png',
+                '8. King\'s College London.png',
+                '9. Tango University (Bhutan).png',
+                '10. Nanhua University.png',
+                '11. กัมพูชา.png',
+            ]
+        ?>
+        
+            <div class="d-flex justify-content-around">
+                @foreach ($sponsor as $s)
+                    <img src="..\img\sponsor\{{ $s }}" alt="" srcset="" height="50">
+                @endforeach
 
 
-    <!-- copyrigth -->
-    <div class="d-flex justify-content-between flex-column">
-        {{-- admin --}}
-        <div class="m-1">
-            <a href="/auth/login" class="btn btn-outline-dark btn-sm"  role="button">เข้าสู่ระบบ</a>
-        </div>
-
-        {{-- copyright --}}
-        <p class="h6 m-1">
-            <i class="fa fa-copyright"></i>
-            {{ date("Y") }} - {{ date("Y")+1 }}  All Rights Reserved
-        </p>
-    </div>
+                <!-- copyrigth -->
+                <div class="d-flex justify-content-between flex-column">
+                    {{-- admin --}}
+                    <div class="m-1">
+                        <a href="/auth/login" class="btn btn-outline-dark btn-sm"  role="button">เข้าสู่ระบบ</a>
+                    </div>
+        
+                    {{-- copyright --}}
+                    <p class="h6 m-1">
+                        <i class="fa fa-copyright"></i>
+                        {{ date("Y") }} - {{ date("Y")+1 }}  All Rights Reserved
+                    </p>
+                </div>
+            </div>
+    
+        
 
 </section>
 {{-- img --}}

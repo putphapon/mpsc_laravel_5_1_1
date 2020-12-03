@@ -40,8 +40,6 @@ class ManuscriptsBlogTag extends Controller
     public function store(Request $request)
     {
         //
-        
-        
 
         $id = $request->search;
         
@@ -56,6 +54,7 @@ class ManuscriptsBlogTag extends Controller
                 ->orWhere('manuscripts_blog_tag','like','%'.$search.'%')
                 ->orWhere('manuscripts_category_name','like','%'.$search.'%')
                 // ->orderBy('updated_at', 'desc')
+                // ->paginate(2);
                 ->get();
     
             $manuscripts_category = MpscManuscriptsCategory::all();

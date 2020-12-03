@@ -19,7 +19,7 @@
 <link rel="shortcut icon" href="/img/logo/logo-mpsc.png" type="image/x-icon">
 
 
-<?php 
+<?php /*
     if (isset($manuscripts_blog)) {
         $j = 0;
         foreach ($manuscripts_blog as $item) {
@@ -42,13 +42,22 @@
         $temp_description = "Maunscript Preservation and Study Center";
         $temp_image = "https://www.your-domain.com/path/image.jpg";
     }
+
+    if (!isset($temp_title)) {
+        $temp_title = "กลุ่มอนุรักษ์และศึกษาคัมภีร์พระไตรปิฎกใบลาน";
+        $temp_url = "http://www.mps-center.in.th";
+        $temp_type = "website";
+        $temp_description = "website";
+        $temp_image = "https://www.your-domain.com/path/image.jpg";
+    }
+    */
 ?>
 
-<meta property="og:title"         content={{ strval($temp_title) }}/>
-<meta property="og:url"           content={{ strval($temp_url) }}/>
-<meta property="og:type"          content={{ strval($temp_type) }}/>
-<meta property="og:description"   content={{ strval($temp_description) }}/>
-<meta property="og:image"           content={{ asset($temp_image) }}>
+<meta property="og:title"         content="Maunscript Preservation and Study Center"/>
+<meta property="og:url"           content="http://www.mps-center.in.th"/>
+<meta property="og:type"          content="website"/>
+<meta property="og:description"   content="กลุ่มอนุรักษ์และศึกษาคัมภีร์พระไตรปิฎกใบลาน"/>
+<meta property="og:image"         content="https://www.your-domain.com/path/image.jpg">
 
 
 <title>@yield('title-bar') | กลุ่มอนุรักษ์และศึกษาคัมภีร์พระไตรปิฎกใบลาน</title>
@@ -81,14 +90,13 @@
 {{-- line share --}}
 <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-145708508-1"></script>
+{{-- Google Analytic --}}
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-  gtag('config', 'UA-145708508-1');
+    gtag('config', 'UA-145708508-1');
 </script>
 
 <!-- Histats.com  START  (aync)-->
@@ -108,7 +116,6 @@
 <script src="{{asset('/js/jquery.js')}}"></script>
 <script src="{{asset('/js/app.js')}}"></script>
 <script src="{{asset('/js/script.js')}}"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 </body>
 </html>

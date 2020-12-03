@@ -20,6 +20,16 @@
                         <a class="dropdown-item bg-transparent" href="{{ action('Home\AboutBoard@index') }}">คณะที่ปรึกษา</a>
                     </div>
                 </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="{{ action('Home\Work@index') }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">งาน</a>
+                    <div class="dropdown-menu" aria-labelledby="work">
+                        <a class="dropdown-item bg-transparent" href="{{ action('Home\WorkSurvey@index') }}">งานสำรวจและอนุรักษ์</a>
+                        <a class="dropdown-item bg-transparent" href="{{ action('Home\WorkExchange@index') }}">งานปริวรรตอักษร</a>
+                        <a class="dropdown-item bg-transparent" href="{{ action('Home\WorkDev@index') }}">งานพัฒนาโปรแกรม</a>
+                        <a class="dropdown-item bg-transparent" href="{{ action('Home\WorkCollab@index') }}">งานด้านความร่วมมือ</a>
+                    </div>
+                </li>
         
                 <li class="nav-item"><a class="nav-link" href="{{ action('Home\Database@index') }}">ฐานข้อมูล</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ action('Home\Scholar@index') }}">บทความวิชาการ/งานวิจัย</a></li>

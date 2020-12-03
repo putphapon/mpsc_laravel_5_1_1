@@ -19,7 +19,7 @@
     <div class="d-flex">
         {{-- add --}}
         <div class="p-2 flex-shrink-0">
-            {{-- button --}}
+            {{-- button --}} 
             <button class="btn btn-primary" data-toggle="modal" data-target="#admin-events-form"><i class="fa fa-plus-square-o" aria-hidden="true"></i>  เพิ่ม</button>
             {{-- Modal --}}
             <div class="modal fade" id="admin-events-form" tabindex="-1" role="dialog" aria-labelledby="admin-events-form" aria-hidden="true">

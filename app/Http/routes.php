@@ -33,6 +33,14 @@ Route::resource('/home/about', 'Home\About');
 Route::resource('/home/objective', 'Home\AboutObjective');
 Route::resource('/home/board', 'Home\AboutBoard');
 
+//Work
+Route::resource('/home/work', 'Home\Work');
+Route::resource('/home/worksurvey', 'Home\WorkSurvey');
+Route::resource('/home/workexchange', 'Home\WorkExchange');
+Route::resource('/home/workdev', 'Home\WorkDev');
+Route::resource('/home/workcollab', 'Home\WorkCollab');
+
+
 //Database
 Route::resource('/home/database', 'Home\Database');
 

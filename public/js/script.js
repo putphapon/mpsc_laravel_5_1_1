@@ -1,10 +1,12 @@
 $(document).ready(function(){
 
+
+
     //alert
         //edit_form
         $('.edit_form').on('submit', function(){
             if(confirm("ต้องการ แก้ไข ข้อมูลหรือไม่ ?")) {
-                return true;
+                 return true;
             } else {
                 return false;
             }
@@ -23,6 +25,8 @@ $(document).ready(function(){
     tinymce.init({
         selector: '.WYSIWYGtextarea'
     });
+
+
 
 
 });
