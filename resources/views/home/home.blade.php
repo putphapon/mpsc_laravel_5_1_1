@@ -21,18 +21,11 @@
     
             <!-- carousel-inner  -->
             <div class="carousel-inner col">
-            <?php $i = 1 ?>
+            <?php $flag = true ?>
             @foreach ($title as $item)
-                @if( $i == 1 )
-                <div class="carousel-item active" data-interval="5000">
+                <div class="carousel-item @if( $flag ) active <?php $flag = false ?> @endif" data-interval="5000">
                     <img src="{{ asset($item->title_image) }}" class="w-100" alt="{{ $item->title_name }}">
                 </div>
-                @else
-                <div class="carousel-item" data-interval="5000">
-                    <img src="{{ asset($item->title_image) }}" class="w-100" alt=" {{ $item->title_name }}">
-                </div>
-                @endif
-                <?php $i++ ?>
             @endforeach
         </div>
         
@@ -56,7 +49,7 @@
         </div>
     </div>
     <div class="m-0 p-0">
-        <img src="..\img\item-intro.png" alt="" class="d-none w-100 m-0 p-0 scoll">
+        <img src="..\img\item-intro.png" alt="" class="w-100 m-0 p-0 scoll">
     </div>
 </div>
 
@@ -70,7 +63,7 @@
         <div class="row d-flex justify-content-around mb-3 mt-3">
             @foreach ($database as $item)  
             <div class="col-sm-6 col-md-3 col-lg-3 p-4 mb-3 cardShadow rounded text-center align-items-center" style="height:250px">
-                <a href="{{$item->database_link}}" class="">
+                <a href="{{$item->database_link}}"  target="blank">
                     <div class="h-75 pr-2 pl-2 d-flex justify-content-center align-items-center">
                         <img src="{{ asset($item->database_image) }}" alt="{{ $item->database_name }}" class="mw-100 mh-100 rounded p-2">
                     </div>
@@ -217,23 +210,28 @@
         </div>
     
         <!-- section content -->
-        <div class="d-flex justify-content-around">
-            <?php $i = 0;  ?>
+        <div class="row">
+            <?php $flag = true ?>
             @foreach ($vdo as $item)
-                @if ($i < 3)
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="card cardShadow bg-transparent">
-                            <div class="embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item" src="{{ $item->vdo_link }}" allowfullscreen></iframe>
-                            </div>
-                            <div class="p-1">
-                                <h5 class="card-title pt-1 text-center">{{ $item->vdo_name }}</h5>
+            <div class="col-md-4 col-sm-6">
+                <div class="card cardShadow bg-transparent">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="{{ $item->vdo_link }}" allowfullscreen></iframe>
+                    </div>
+                    <div class="p-4">
+                    @if ($flag)
+                        <div class="text-center">
+                            <span class="badge badge-danger">ตอนล่าสุด</span>
+                        </div>
+                        <?php $flag = false ?>
+                    @endif
+                            <h5 class="card-title pt-1 text-center">{{ $item->vdo_name }}</h5>
+                            <div class="card-para overflow-auto p-3 mb-2">
                                 <p>{{ $item->vdo_detail }}</p>
                             </div>
                         </div>
                     </div>
-                    <?php $i++;  ?>
-                @endif
+                </div>
             @endforeach
         </div>
     </div>

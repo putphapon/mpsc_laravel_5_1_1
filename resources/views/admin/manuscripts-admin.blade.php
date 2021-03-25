@@ -534,7 +534,7 @@
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                                             <button class="btn btn-danger btn-sm" type="submit" value="Submit"><i class="fa fa-trash-o" aria-hidden="true"></i>  ลบ</button>
-                                            </form>
+                                        </form>
                                         </td>
                                     </tr>
                                 @endforeach

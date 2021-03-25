@@ -28,7 +28,7 @@ class Database extends Controller
 
         return view('admin.database-admin', ['database' => $database]);
     }
-
+ 
     /**
      * Show the form for creating a new resource.
      *

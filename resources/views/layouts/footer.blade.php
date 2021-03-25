@@ -21,7 +21,7 @@
                     </ul>
                 </div>
             </div>
-            
+             
             <!-- contact -->
             <div class="col-md-4 col-sm-12">
                 <p class="font-weight-bold text-uppercase">contact us</p>
@@ -46,31 +46,36 @@
             </div>
         </div>
 
-        {{-- sponsor --}}
-        <?php
-            $sponsor = [
-                '1. มูลนิธิธรรมชัย.png',
-                '2. DTP.png',
-                '3. SAT_Tokyo.png',
-                '4. Hsuan Chuang University  Taiwan.png',
-                '5. Myanmar@SPSU (Yangon).png',
-                '6. Myanmar@SPSU (Mandalay).png',
-                '7. Myanmar@ITBMU.png',
-                '8. King\'s College London.png',
-                '9. Tango University (Bhutan).png',
-                '10. Nanhua University.png',
-                '11. กัมพูชา.png',
-            ]
-        ?>
         
-            <div class="d-flex justify-content-around">
-                @foreach ($sponsor as $s)
-                    <img src="..\img\sponsor\{{ $s }}" alt="" srcset="" height="50">
-                @endforeach
+        <div class="row">
+            <div class="col-md-9 coll-sm-12">
+                
+            {{-- sponsor --}}
+            <?php
+                $sponsor = [
+                    '1. มูลนิธิธรรมชัย.png',
+                    '2. DTP.png',
+                    '3. SAT_Tokyo.png',
+                    '4. Hsuan Chuang University  Taiwan.png',
+                    '5. Myanmar@SPSU (Yangon).png',
+                    '6. Myanmar@SPSU (Mandalay).png',
+                    '7. Myanmar@ITBMU.png',
+                    '8. King\'s College London.png',
+                    '9. Tango University (Bhutan).png',
+                    '10. Nanhua University.png',
+                    '11. กัมพูชา.png',
+                ]
+            ?>
+                <div class="d-flex flex-wrap justify-content-around">
+                    @foreach ($sponsor as $s)
+                        <img src="..\img\sponsor\{{ $s }}" alt="" srcset="" height="50">
+                    @endforeach
+                </div>
+            </div>
 
-
+            <div class="col-md-3 col-sm-12">
                 <!-- copyrigth -->
-                <div class="d-flex justify-content-between flex-column">
+                <div class="d-flex justify-content-between flex-column mt-2">
                     {{-- admin --}}
                     <div class="m-1">
                         <a href="/auth/login" class="btn btn-outline-dark btn-sm"  role="button">เข้าสู่ระบบ</a>
@@ -83,11 +88,12 @@
                     </p>
                 </div>
             </div>
+        </div>
     
         
 
 </section>
 {{-- img --}}
 <div class="m-0 p-0 overflow-hidden" style="width:100vw;height:auto;">
-    <img src="..\img\item-footer.png" alt="" class="ml-n5 mr-n5 mb-n3 pl-n5 pr-n5 pb-n4 h-auto" style="width:120%;>
+    <img src="..\img\item-footer.png" alt="" class="ml-n5 mr-n5 mb-n3 pl-n5 pr-n5 pb-n4 h-auto" style="width:120%;">
 </div>

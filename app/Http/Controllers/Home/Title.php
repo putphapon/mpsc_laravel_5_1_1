@@ -18,16 +18,16 @@ class Title extends Controller
     public function index()
     {
         $title = DB::table('mpsc_titles')->orderBy('created_at', 'desc')->get();
-        $database = DB::table('mpsc_databases')->get();
+        $database = DB::table('mpsc_databases')->take(8)->get();
 
         $scholar_category = DB::table('mpsc_scholar_categories')->get();
         $scholar_blog = DB::table('mpsc_scholar_blogs')->orderBy('created_at', 'desc')->get();
         
-        $manuscripts_category = DB::table('mpsc_manuscripts_categories')->get();
+        $manuscripts_category = DB::table('mpsc_manuscripts_categories')->take(6)->get();
         $manuscripts_blog = DB::table('mpsc_manuscripts_blogs')->orderBy('created_at', 'desc')->get();
         
-        $vdo = DB::table('mpsc_vdos')->get();
-        $events = DB::table('mpsc_events')->orderBy('events_date', 'desc')->get();
+        $vdo = DB::table('mpsc_vdos')->orderBy('created_at', 'desc')->take(6)->get();
+        $events = DB::table('mpsc_events')->orderBy('events_date', 'desc')->take(3)->get();
         $shops = DB::table('mpsc_shops')->orderBy('created_at', 'desc')->get();
 
         $contact = DB::table('mpsc_contacts')->get();

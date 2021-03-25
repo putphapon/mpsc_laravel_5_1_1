@@ -34,7 +34,7 @@
                     @foreach ($contact as $item)
                     <tr>
                         {{-- No. --}}
-                        <th scope="row">{{ ++$i }}</th>
+                        <th scope="row">{{ ++$i }}</th> 
                         {{-- Name --}}
                         <td>{{ $item->contact_name }}</td>
                         {{-- address --}}

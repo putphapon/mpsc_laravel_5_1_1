@@ -50,7 +50,7 @@
 <meta property="og:description"   content={{ strval($temp_description) }}/>
 <meta property="og:image"           content={{ asset($temp_image) }}>
 
-
+ 
 <title>@yield('title-bar') | กลุ่มอนุรักษ์และศึกษาคัมภีร์พระไตรปิฎกใบลาน</title>
 
 </head>
